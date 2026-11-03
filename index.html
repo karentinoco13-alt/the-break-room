@@ -418,7 +418,8 @@ footer .small { font-size: 13px; opacity: .85; }
       <li><b>No ads, no tracking, never sold</b><span>No tracking cookies, no analytics, no data sales. Ever.</span></li>
       <li><b>Delete it all, any time</b><span>Edit or delete your rating, or erase everything you've posted with one button.</span></li>
     </ul>
-    <p class="vent">So vent. Say what you'd say in the real break room. <em>That's what this room is for.</em></p>
+    <p class="vent">So say it all, straight and honest. <em>That's what this room is for.</em></p>
+    <p class="note" style="margin:0;font-size:14px;color:var(--ink)"><b>One house rule: keep it professional.</b> Proper manners and vocabulary, always. Profanity isn't accepted here, and ratings that use it can't be posted.</p>
   </section>
 
   <section class="story" aria-labelledby="storyTitle">
@@ -426,6 +427,7 @@ footer .small { font-size: 13px; opacity: .85; }
     <p>In the break room, virtual or not, employees say how their employer really treats them. The ratings are savage. Nobody holds back. They talk about the manager who didn't stand up for them, and the tools that are clunky and useless, even though nobody said so during training.</p>
     <p>In the break room, people get to be human, with all their imagination. They have the fix for that broken diagnostic tool they use every day, the one they're tired of raising with a manager who never does anything about it. They're over it. But in the break room there are no constraints. They rest, and they say how their jobs could be better and more efficient when no manager is listening. And honestly, even if one were, they wouldn't understand.</p>
     <p class="kicker">This is that room. Open to everyone, and off the record.</p>
+    <p><b>Our mission:</b> open communication, unfiltered by management, for companies that want to do better. Honest feedback from the people doing the work, turned into better communication, process improvement and innovation.</p>
     <p class="rule-note">One difference from the real break room: here you talk about the company, the team and the tools, never a person by name. That's what keeps you protected.</p>
   </section>
 
@@ -560,7 +562,7 @@ footer .small { font-size: 13px; opacity: .85; }
         </div>
       </div>
 
-      <p class="rules"><b>Say it all. Your name is never shown.</b> To stay invisible, leave out details only you would know, like an exact date or a one-of-a-kind incident. Rate the company, the team and the tools, never a person by name. You get one rating per employer, and you can edit or delete it any time.</p>
+      <p class="rules"><b>Say it all, and keep it professional.</b> Proper manners and vocabulary only: profanity isn't accepted and will stop your rating from posting. <b>Your name is never shown.</b> To stay invisible, leave out details only you would know, like an exact date or a one-of-a-kind incident. Rate the company, the team and the tools, never a person by name. You get one rating per employer, and you can edit or delete it any time.</p>
       <label class="agree" for="f-agree"><input type="checkbox" id="f-agree"> <span>I'm a current or former employee of this company, this is my own honest experience, and I agree to the <button type="button" class="linkish" id="openLegal">Terms and Privacy notice</button>.</span></label>
       <p class="err" id="formErr" hidden></p>
       <div class="bar">
@@ -624,6 +626,7 @@ footer .small { font-size: 13px; opacity: .85; }
           <li><b>First-hand ratings only.</b> Only current or former employees may rate an employer, and only based on their own experience.</li>
           <li><b>No paid or fake ratings.</b> No rewarded or pressured ratings. Employers and anyone acting for them may not rate their own company or a competitor.</li>
           <li><b>Rate the company, not a person.</b> Do not post names of coworkers or managers, contact details, or anything that identifies someone.</li>
+          <li><b>Professional decorum.</b> Keep proper manners and vocabulary in everything you post. Profanity, insults and slurs are not accepted. The app blocks common profanity, and the developer removes anything that breaks this rule.</li>
           <li><b>Keep it lawful.</b> No threats, harassment, hate speech, statements you know are false, or confidential business information or trade secrets.</li>
           <li><b>Opinions, not facts.</b> Ratings are the opinions of the people who wrote them. They are not verified or endorsed by the developer, and this app is not affiliated with any employer listed.</li>
           <li><b>Your responsibility.</b> You are responsible for what you post. Any decision you make based on ratings here, such as taking or leaving a job, is yours.</li>
@@ -689,6 +692,7 @@ footer .small { font-size: 13px; opacity: .85; }
       <p>Please read this summary of the Terms of use. You need to accept them before you can use the app.</p>
       <ul class="gate-list">
         <li><b>Your privacy comes first.</b> Your name, email and photo are never shown with a rating, and no employer can see who wrote it. Ratings are stored with an anonymous account ID by the service that hosts this app.</li>
+        <li><b>Professional decorum required.</b> Be honest, and keep proper manners and vocabulary. Profanity is not accepted in this app.</li>
         <li><b>Free while testing.</b> The Break Room is free to use while it's being tested for feedback. Your feedback goes only to the app's developer and is used to plan future versions.</li>
         <li><b>Honest, first-hand ratings.</b> Only rate an employer you work or worked for, based on your own experience. No paid, rewarded or fake ratings.</li>
         <li><b>Safety in numbers.</b> An employer's scores and comments appear only after 5 people have rated it.</li>
@@ -727,6 +731,14 @@ footer .small { font-size: 13px; opacity: .85; }
   const POLL = [["employee", "The employee", "var(--c-mgmt)"], ["employer", "The employer", "var(--s1)"], ["both", "Both", "var(--c-balance)"], ["neither", "Neither", "var(--s5)"]];
   const labelOf = (list, v) => (list.find((x) => x[0] === v) || [])[1] || "";
   const MIN_RATINGS = 5;
+  // Professional decorum: block common profanity, including simple disguises like f*ck or sh!t.
+  const PROFANITY = [/\bf+[u*#@]*c+k+\w*/, /\bf[*#@]+k\w*/, /\bmotherf\w*/, /\bsh[i*!1]+t+\w*/, /\bbullsh\w*/, /\bhorsesh\w*/, /\bb[i*!1]tch\w*/, /\ba[s$*]{2}hole\w*/, /\bjacka[s$]{2}\w*/, /\bdumba[s$]{2}\w*/, /\bbastards?\b/, /\bdickheads?\b/, /\bc[u*]nts?\b/, /\bpiss(ed|ing|es)?\b/, /\bpissed\s+off\b/, /\b(god)?damn(ed|it)?\b/, /\bcrap(py|s)?\b/, /\bwtf\b/, /\bstfu\b/, /\bwhore\w*/, /\bslut\w*/, /\bprick\w*/, /\btwat\w*/, /\bwank\w*/, /\bscrew(ed)?\s+(you|them|us|over)\b/];
+  const normalizeForCheck = (t) => t.toLowerCase().replace(/@/g, "a").replace(/\$/g, "s").replace(/0/g, "o").replace(/3/g, "e");
+  function findProfanity(text) {
+    const raw = (text || "").toLowerCase(), t = normalizeForCheck(text || "");
+    for (const re of PROFANITY) { const m = raw.match(re) || t.match(re); if (m) return m[0]; }
+    return null;
+  }
   let tallies = {}, myVotes = {}; // a company's scores and comments stay hidden until this many people rate it
   const MEANING = ["",
     "Toxic, unsafe or disrespectful. People are looking for the exit and would warn a friend to stay away.",
@@ -811,6 +823,7 @@ footer .small { font-size: 13px; opacity: .85; }
 
   $("fbSend").addEventListener("click", async () => {
     const txt = $("fb-text").value.trim(); const note = $("fbNote");
+    if (findProfanity(txt)) { note.textContent = "Please keep it professional. Rephrase without profanity and send again."; return; }
     if (!txt) { note.textContent = "Write something first."; return; }
     if (!db || !me) { note.textContent = "Sign in to claude.ai to send feedback."; return; }
     $("fbSend").disabled = true;
@@ -1184,6 +1197,11 @@ footer .small { font-size: 13px; opacity: .85; }
     if (!k) { err.textContent = "Enter the employer's name."; err.hidden = false; $("f-company").focus(); return; }
     if (!getRadio("tenure")) { err.textContent = "Choose how long you've worked there."; err.hidden = false; return; }
     if (!overall) { err.textContent = "Pick an overall rating from 1 to 5."; err.hidden = false; return; }
+    const checks = [["f-role", "your role"], ["f-division", "the division"], ["f-pros", "the good"], ["f-cons", "the bad"], ["f-exitstory", "what happened"]];
+    for (const [id, label] of checks) {
+      const hit = findProfanity($(id).value);
+      if (hit) { err.textContent = `Please keep it professional. "${hit}" in ${label} isn't accepted here. Rephrase it and post again; strong feelings are welcome, profanity isn't.`; err.hidden = false; $(id).focus(); return; }
+    }
     if (!$("f-agree").checked) { err.textContent = "Confirm you work or worked there and agree to the Terms and Privacy notice."; err.hidden = false; return; }
     if (!me) { err.textContent = "Sign in to claude.ai to post a rating."; err.hidden = false; return; }
     const cats = {}; CATS.forEach(([ck]) => { const v = Number(getRadio("c_" + ck)); if (v) cats[ck] = v; });

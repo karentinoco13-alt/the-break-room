@@ -12,6 +12,14 @@ In the break room, people get to be human, with all their imagination. They have
 
 **This is that room. Open to everyone, and off the record.** One difference from the real break room: here you talk about the company, the team and the tools, never a person by name. That's what keeps you protected.
 
+## Our mission
+
+Open communication, unfiltered by management, for companies that want to do better. Honest feedback from the people doing the work, turned into better communication, process improvement and innovation.
+
+## House rule: keep it professional
+
+Say it all, honestly. Keep proper manners and vocabulary. Profanity is not accepted: the app blocks common profanity, and anything that slips through is removed.
+
 ## What it does
 
 - **Rate 1 to 5:** 1 Get out · 2 Bad · 3 It's a job · 4 Good · 5 Great, each with a plain-language meaning
