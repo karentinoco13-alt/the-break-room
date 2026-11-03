@@ -268,6 +268,12 @@ label[for="f-pros"] { color: var(--s5); font-weight: 700; } label[for="f-cons"] 
 .maptbl td { padding: 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
 .maptbl td:first-child { font-weight: 700; white-space: nowrap; }
 .caveat { font-size: 13px; color: var(--ink); background: color-mix(in srgb, var(--sun) 22%, var(--paper)); border-radius: 10px; padding: 12px 14px; margin: 0; }
+.story { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; padding: 22px 24px; border-radius: 14px; background: var(--paper); border: 2px solid var(--rule); position: relative; overflow: hidden; }
+.story::before { content: "\201C"; position: absolute; right: 18px; top: -18px; font-family: var(--f-display); font-weight: 900; font-size: 160px; line-height: 1; color: var(--sun); opacity: .55; }
+.story h2 { font-size: clamp(24px, 4vw, 32px); font-weight: 900; font-stretch: 78%; color: var(--hero); position: relative; }
+.story p { margin: 0; font-size: 16px; max-width: 68ch; position: relative; }
+.story .kicker { font-weight: 700; color: var(--pop); }
+.story .rule-note { font-size: 14px; color: var(--muted); border-top: 2px dashed var(--rule); padding-top: 12px; }
 .legal { background: var(--paper); border: 2px solid var(--rule); border-radius: 14px; overflow: hidden; }
 .legal > summary { cursor: pointer; padding: 16px 20px; font-family: var(--f-display); font-weight: 800; font-stretch: 85%; font-size: 20px; color: var(--hero); list-style: none; display: flex; justify-content: space-between; gap: 12px; }
 .legal > summary::after { content: "+"; font-size: 24px; line-height: 1; color: var(--pop); }
@@ -332,6 +338,14 @@ footer .small { font-size: 13px; opacity: .85; }
     </div>
     <div class="spectrum" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
   </header>
+
+  <section class="story" aria-labelledby="storyTitle">
+    <h2 id="storyTitle">Why it's called The Break Room</h2>
+    <p>In the break room, virtual or not, employees say how their employer really treats them. The ratings are savage. Nobody holds back. They talk about the manager who didn't stand up for them, and the tools that are clunky and useless, even though nobody said so during training.</p>
+    <p>In the break room, people get to be human, with all their imagination. They have the fix for that broken diagnostic tool they use every day, the one they're tired of raising with a manager who never does anything about it. They're over it. But in the break room there are no constraints. They rest, and they say how their jobs could be better and more efficient when no manager is listening. And honestly, even if one were, they wouldn't understand.</p>
+    <p class="kicker">This is that room. Open to everyone, and on the record.</p>
+    <p class="rule-note">One difference from the real break room: here you talk about the company, the team and the tools, never a person by name. That's what keeps you protected.</p>
+  </section>
 
   <div class="bar" id="bar">
     <input id="q" class="search" type="search" placeholder="Search employers" aria-label="Search employers" autocomplete="off">

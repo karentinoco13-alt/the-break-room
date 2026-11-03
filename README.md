@@ -4,6 +4,14 @@ Customers have rated companies forever. Now it's the employees' turn.
 
 **The Break Room** lets employees rate their employer from 1 to 5: the good, the bad and the worst. No sponsored badges. No paid awards. Just the people who clock in.
 
+## Why it's called The Break Room
+
+In the break room, virtual or not, employees say how their employer really treats them. The ratings are savage. Nobody holds back. They talk about the manager who didn't stand up for them, and the tools that are clunky and useless, even though nobody said so during training.
+
+In the break room, people get to be human, with all their imagination. They have the fix for that broken diagnostic tool they use every day, the one they're tired of raising with a manager who never does anything about it. They're over it. But in the break room there are no constraints. They rest, and they say how their jobs could be better and more efficient when no manager is listening. And honestly, even if one were, they wouldn't understand.
+
+**This is that room. Open to everyone, and on the record.** One difference from the real break room: here you talk about the company, the team and the tools, never a person by name. That's what keeps you protected.
+
 ## What it does
 
 - **Rate 1 to 5:** 1 Get out · 2 Bad · 3 It's a job · 4 Good · 5 Great, each with a plain-language meaning
