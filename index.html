@@ -304,6 +304,39 @@ label[for="f-pros"] { color: var(--s5); font-weight: 700; } label[for="f-cons"] 
 .promises span { font-size: 14px; color: var(--muted); }
 .vent { margin: 0; font-size: 17px; font-weight: 700; }
 .vent em { font-style: normal; color: var(--pop); }
+.journey-box { display: grid; gap: 16px; padding: 16px; border-radius: 12px; background: color-mix(in srgb, var(--c-mgmt) 7%, var(--paper)); border: 2px dashed color-mix(in srgb, var(--c-mgmt) 40%, transparent); }
+.journey-box h3 { margin: 0; font-family: var(--f-display); font-weight: 800; font-stretch: 85%; font-size: 22px; color: var(--hero); }
+.sep-box { display: grid; gap: 14px; padding: 14px; border-radius: 10px; background: var(--paper); border-left: 5px solid var(--c-growth); }
+.chips-pick { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips-pick label { position: relative; }
+.chips-pick input { position: absolute; opacity: 0; inset: 0; }
+.chips-pick span { display: inline-block; padding: 7px 13px; border-radius: 999px; border: 2px solid var(--rule); font-size: 13.5px; font-weight: 600; cursor: pointer; background: var(--paper); }
+.chips-pick input:checked + span { background: var(--c-growth); border-color: var(--c-growth); color: #fff; }
+.chips-pick input:disabled + span { opacity: .45; cursor: not-allowed; }
+.chips-pick input:focus-visible + span { outline: 3px solid var(--pop); outline-offset: 2px; }
+.share-opt { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; }
+.share-opt input { width: 20px; height: 20px; accent-color: var(--c-growth); margin-top: 1px; flex: none; }
+#pr-yes + span { --segc: var(--s5); } #pr-partly + span { --segc: var(--s3); } #pr-no + span { --segc: var(--s1); }
+.timeline { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: 10px; position: relative; }
+.step { border-radius: 12px; padding: 12px 14px; background: var(--scb, var(--paper)); border-top: 6px solid var(--sc, var(--rule)); display: grid; gap: 2px; }
+.step .k { font-family: var(--f-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.step b { font-family: var(--f-display); font-weight: 900; font-stretch: 72%; font-size: 36px; line-height: 1; color: var(--sc, var(--muted)); font-variant-numeric: tabular-nums; }
+.step span { font-size: 12.5px; color: var(--muted); }
+.jgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 18px; }
+.ended { display: grid; gap: 10px; padding: 12px 14px; border-radius: 10px; background: color-mix(in srgb, var(--c-growth) 9%, var(--paper)); border-left: 5px solid var(--c-growth); }
+.ended .story-txt { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 14px; }
+.rchips { display: flex; flex-wrap: wrap; gap: 6px; }
+.rchip { font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: var(--paper); border: 1.5px solid color-mix(in srgb, var(--c-growth) 50%, transparent); }
+.rchip.type { background: var(--c-growth); color: #fff; border-color: var(--c-growth); }
+.poll { display: grid; gap: 8px; border-top: 2px dashed var(--rule); padding-top: 10px; }
+.poll-q { font-weight: 700; font-size: 14px; }
+.poll-opts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 130px), 1fr)); gap: 8px; }
+.poll-opt { position: relative; overflow: hidden; border: 2px solid var(--rule); border-radius: 10px; background: var(--paper); padding: 8px 10px; text-align: left; cursor: pointer; font-weight: 700; font-size: 13.5px; color: var(--ink); display: flex; justify-content: space-between; gap: 6px; }
+.poll-opt .fillbar { position: absolute; inset: 0 auto 0 0; background: color-mix(in srgb, var(--pc) 22%, transparent); z-index: 0; }
+.poll-opt > span { position: relative; z-index: 1; }
+.poll-opt.mine { border-color: var(--pc); }
+.poll-opt[disabled] { cursor: default; }
+.poll-note { font-size: 12px; color: var(--muted); }
 .legal { background: var(--paper); border: 2px solid var(--rule); border-radius: 14px; overflow: hidden; }
 .legal > summary { cursor: pointer; padding: 16px 20px; font-family: var(--f-display); font-weight: 800; font-stretch: 85%; font-size: 20px; color: var(--hero); list-style: none; display: flex; justify-content: space-between; gap: 12px; }
 .legal > summary::after { content: "+"; font-size: 24px; line-height: 1; color: var(--pop); }
@@ -380,7 +413,7 @@ footer .small { font-size: 13px; opacity: .85; }
     <ul class="promises">
       <li><b>Your name is never shown</b><span>Not on your rating, not anywhere. Ratings carry no name, email or photo.</span></li>
       <li><b>Your employer can't see who wrote it</b><span>No company gets your identity, and no company can buy, hide or edit a rating.</span></li>
-      <li><b>Safety in numbers</b><span>Nothing about a company shows until 5 people rate it. Teams and locations need 5 too.</span></li>
+      <li><b>Safety in numbers</b><span>Nothing about a company shows until 5 people rate it. Teams, locations and reasons for leaving need 5 too.</span></li>
       <li><b>You share only what you choose</b><span>Role, team and comments are all optional. Skip anything that feels too close.</span></li>
       <li><b>No ads, no tracking, never sold</b><span>No tracking cookies, no analytics, no data sales. Ever.</span></li>
       <li><b>Delete it all, any time</b><span>Edit or delete your rating, or erase everything you've posted with one button.</span></li>
@@ -463,6 +496,36 @@ footer .small { font-size: 13px; opacity: .85; }
         <div class="field">
           <span class="label" id="tenureLbl">How long have you worked there?</span>
           <div class="seg" role="radiogroup" aria-labelledby="tenureLbl" id="tenureSeg"></div>
+        </div>
+      </div>
+
+      <div class="journey-box">
+        <h3>Your journey, start to finish</h3>
+        <div class="mini" id="jcats"></div>
+        <div class="field">
+          <span class="label" id="promLbl">Was the job what they promised when you were hired?</span>
+          <div class="seg" role="radiogroup" aria-labelledby="promLbl">
+            <label><input type="radio" name="promised" id="pr-yes" value="yes"><span>Yes</span></label>
+            <label><input type="radio" name="promised" id="pr-partly" value="partly"><span>Partly</span></label>
+            <label><input type="radio" name="promised" id="pr-no" value="no"><span>No</span></label>
+          </div>
+        </div>
+        <div class="sep-box" id="sepBox" hidden>
+          <div class="field">
+            <span class="label" id="sepLbl">How did it end?</span>
+            <div class="seg" role="radiogroup" aria-labelledby="sepLbl" id="sepSeg"></div>
+          </div>
+          <div class="field">
+            <span class="label" id="reasonLbl">Why did you leave? Pick up to 3</span>
+            <div class="chips-pick" role="group" aria-labelledby="reasonLbl" id="reasonPick"></div>
+          </div>
+          <div class="mini" id="exitRow"></div>
+          <div class="field">
+            <label class="label" for="f-exitstory">What happened? (optional)</label>
+            <textarea id="f-exitstory" maxlength="800" placeholder="The short version of how it ended"></textarea>
+          </div>
+          <label class="share-opt" for="f-share"><input type="checkbox" id="f-share"> <span><b>Show how it ended on my rating</b> so readers can weigh in on who had room to do better: me, the employer, both or neither. Off by default. If you turn it on, leave out details that would point to you.</span></label>
+          <p class="note" style="margin:0">Either way, your reasons count in the company's totals, shown only once 5 former employees have answered.</p>
         </div>
       </div>
 
@@ -566,6 +629,8 @@ footer .small { font-size: 13px; opacity: .85; }
           <li><b>Your responsibility.</b> You are responsible for what you post. Any decision you make based on ratings here, such as taking or leaving a job, is yours.</li>
           <li><b>Time at the company.</b> Each rating shows how long the person says they worked there and whether they still do, so readers can weigh experience. This is self-reported and not verified. Giving false information breaks these terms.</li>
           <li><b>Divisions and groups.</b> You may name the division, team or location your rating is about and flag it as better or worse than the rest of the company. Name a group, never a person. A group's name and scores are shown only after 5 people from it have rated.</li>
+          <li><b>The full journey.</b> You can rate the hiring process, onboarding and how your exit was handled, and say how it ended and why. Reasons for leaving appear only in company totals once 5 former employees answer, unless you choose to show your own story.</li>
+          <li><b>Readers weigh in.</b> When someone shares how their job ended, readers can vote on who had room to do better: the employee, the employer, both or neither. Votes are anonymous, one per reader per story, and can be changed.</li>
           <li><b>Minimum of 5 ratings.</b> An employer's scores, award check and comments are shown only after 5 people have rated it, so nobody can work out who wrote what.</li>
           <li><b>Moderation.</b> One rating per employer per person. The developer may remove any rating that breaks these terms.</li>
           <li><b>Provided as is.</b> The app is provided "as is" and "as available", without warranties of any kind. To the extent the law allows, the developer is not liable for any direct or indirect loss arising from its use, including loss of data.</li>
@@ -575,7 +640,7 @@ footer .small { font-size: 13px; opacity: .85; }
       <section id="sec-privacy" aria-labelledby="privH">
         <h3 id="privH">Privacy and security</h3>
         <ul>
-          <li><b>What is stored.</b> Your scores, comments, the role, division and employment status you enter, the date, and an anonymous account ID. Feedback you send is stored the same way.</li>
+          <li><b>What is stored.</b> Your scores, comments, the role, division and employment status you enter, the date, and an anonymous account ID. Feedback you send and votes you cast are stored the same way.</li>
           <li><b>Why the ID.</b> It links a rating to your account so you can edit or delete it, and so each person rates an employer only once.</li>
           <li><b>What is never stored.</b> This app never saves or shows your name, email address or photo.</li>
           <li><b>Who sees what.</b> Everyone with access sees ratings and comments, with no names, and only for employers with at least 5 ratings. This is a display rule in the app, not encryption. The developer can see the anonymous ID but not your name. Your feedback goes only to the developer.</li>
@@ -656,7 +721,13 @@ footer .small { font-size: 13px; opacity: .85; }
     b.append(m, document.createTextNode(text)); return b;
   };
   const tenureLabel = (v) => (TENURE.find((t) => t[0] === v) || [])[1] || "";
-  const MIN_RATINGS = 5; // a company's scores and comments stay hidden until this many people rate it
+  const JOURNEY = [["hire", "Hiring process"], ["onboard", "Onboarding & training"]];
+  const SEPTYPES = [["resigned", "I resigned"], ["laidoff", "Laid off"], ["letgo", "Let go"], ["contract", "Contract ended"], ["retired", "Retired"], ["other", "Other"]];
+  const REASONS = [["pay", "Pay or benefits"], ["mgmt", "Management"], ["balance", "Work-life balance"], ["culture", "Culture or respect"], ["growth", "No room to grow"], ["burnout", "Burnout or stress"], ["promise", "Job wasn't as promised"], ["layoff", "Layoffs or restructuring"], ["offer", "A better offer"], ["personal", "Personal or family"], ["relocate", "Moved away"], ["rother", "Other"]];
+  const POLL = [["employee", "The employee", "var(--c-mgmt)"], ["employer", "The employer", "var(--s1)"], ["both", "Both", "var(--c-balance)"], ["neither", "Neither", "var(--s5)"]];
+  const labelOf = (list, v) => (list.find((x) => x[0] === v) || [])[1] || "";
+  const MIN_RATINGS = 5;
+  let tallies = {}, myVotes = {}; // a company's scores and comments stay hidden until this many people rate it
   const MEANING = ["",
     "Toxic, unsafe or disrespectful. People are looking for the exit and would warn a friend to stay away.",
     "More bad days than good. Real problems with pay, management or respect that nobody is fixing.",
@@ -697,6 +768,14 @@ footer .small { font-size: 13px; opacity: .85; }
 
   for (let i = 5; i >= 1; i--) { const d = lvl(el("div", "lv"), i); d.append(el("b", null, `${i} · ${LABELS[i]}`), el("span", null, MEANING[i])); $("legendGrid").append(d); }
   TENURE.forEach(([v, label]) => { const l = el("label"); const i = el("input"); i.type = "radio"; i.name = "tenure"; i.value = v; i.id = "ten-" + v; l.append(i, el("span", null, label)); $("tenureSeg").append(l); });
+  JOURNEY.forEach(([k, label]) => { const r = el("div", "mini-row"); const lab = el("span", null, label); lab.id = "j-" + k; const pp = el("div", "punch"); pp.setAttribute("role", "radiogroup"); pp.setAttribute("aria-labelledby", lab.id); punch(pp, "j_" + k, false); r.append(lab, pp); $("jcats").append(r); });
+  { const r = el("div", "mini-row"); const lab = el("span", null, "How the exit was handled"); lab.id = "j-exit"; const pp = el("div", "punch"); pp.setAttribute("role", "radiogroup"); pp.setAttribute("aria-labelledby", lab.id); punch(pp, "j_exit", false); r.append(lab, pp); $("exitRow").append(r); }
+  SEPTYPES.forEach(([v, label]) => { const l = el("label"); const i = el("input"); i.type = "radio"; i.name = "septype"; i.value = v; i.id = "sep-" + v; l.append(i, el("span", null, label)); $("sepSeg").append(l); });
+  REASONS.forEach(([v, label]) => { const l = el("label"); const i = el("input"); i.type = "checkbox"; i.name = "reason"; i.value = v; i.id = "rs-" + v; l.append(i, el("span", null, label)); $("reasonPick").append(l); });
+  const syncReasons = () => { const on = document.querySelectorAll('input[name="reason"]:checked').length; document.querySelectorAll('input[name="reason"]').forEach((i) => { i.disabled = !i.checked && on >= 3; }); };
+  $("reasonPick").addEventListener("change", syncReasons);
+  const syncSep = () => { $("sepBox").hidden = getRadio("status") !== "former"; };
+  document.querySelectorAll('input[name="status"]').forEach((i) => i.addEventListener("change", syncSep));
   const syncTenureLabel = () => { $("tenureLbl").textContent = getRadio("status") === "former" ? "How long did you work there?" : "How long have you worked there?"; };
   document.querySelectorAll('input[name="status"]').forEach((i) => i.addEventListener("change", syncTenureLabel));
   function fillDivisionList() {
@@ -753,7 +832,7 @@ footer .small { font-size: 13px; opacity: .85; }
     if (!db || !me) { store.del("br-terms"); note.textContent = "Nothing stored for you here besides your acceptance, which is now cleared."; return; }
     b.disabled = true;
     try {
-      await db.doc("reviews/" + me).delete(); await db.doc("feedback/" + me).delete();
+      await db.doc("reviews/" + me).delete(); await db.doc("feedback/" + me).delete(); await db.doc("votes/" + me).delete();
       store.del("br-terms"); docs = docs.filter((d) => d.uid !== me); aggregate(); renderList(); if (openKey) renderDetail();
       note.textContent = "All your data is deleted."; toast("All your data is deleted"); setTimeout(showGate, 1500);
     } catch { note.textContent = "Couldn't delete everything. Try again."; }
@@ -982,6 +1061,29 @@ footer .small { font-size: 13px; opacity: .85; }
         const b = el("div", "bad"); b.append(el("span", "label", "The bad"), document.createTextNode(r.cons || "—"));
         pc.append(a, b); box.append(pc);
       } else box.append(el("span", "note", "Left a score, no comments."));
+      const j = r.journey || {};
+      if (r.status === "former" && j.share && (j.sepType || j.reasons || j.story)) {
+        const en = el("div", "ended"); en.append(el("span", "label", "How it ended"));
+        const ch = el("div", "rchips");
+        if (j.sepType) ch.append(el("span", "rchip type", labelOf(SEPTYPES, j.sepType)));
+        (j.reasons || []).forEach((x) => ch.append(el("span", "rchip", labelOf(REASONS, x))));
+        if (j.exit) { const xc = el("span", "rchip", `Exit handled: ${j.exit}/5`); ch.append(xc); }
+        en.append(ch);
+        if (j.story) en.append(el("div", "story-txt", j.story));
+        const key = r.uid + "__" + c.key; const t = tallies[key] || {}; const tot = POLL.reduce((a, [v]) => a + (t[v] || 0), 0);
+        const poll = el("div", "poll"); poll.append(el("span", "poll-q", "Who had room to do better? You decide."));
+        const opts = el("div", "poll-opts"); const own = me && r.uid === me; const can = db && me && canWrite && !own;
+        POLL.forEach(([v, l, col]) => {
+          const b = el("button", "poll-opt" + (myVotes[key] === v ? " mine" : "")); b.type = "button"; b.style.setProperty("--pc", col);
+          const pct = tot ? Math.round((t[v] || 0) / tot * 100) : 0;
+          const fb = el("span", "fillbar"); fb.style.width = pct + "%"; b.append(fb, el("span", null, l), el("span", null, tot ? pct + "%" : ""));
+          b.setAttribute("aria-pressed", myVotes[key] === v ? "true" : "false");
+          if (can) b.onclick = () => castVote(key, v); else b.disabled = true;
+          opts.append(b);
+        });
+        poll.append(opts, el("span", "poll-note", own ? `Readers are weighing in on your story · ${tot} vote${tot === 1 ? "" : "s"}` : tot ? `${tot} reader${tot === 1 ? "" : "s"} weighed in${myVotes[key] ? " · tap another to change your vote" : ""}` : "Be the first to weigh in."));
+        en.append(poll); box.append(en);
+      }
       return box;
     };
     const total = c.reviews.length;
@@ -996,7 +1098,35 @@ footer .small { font-size: 13px; opacity: .85; }
       group.forEach((r) => lv.append(mkReview(r)));
       rv.append(lv);
     }
-    p.append(head, sum, who, divs, aw, rv);
+    const jr = el("div", "rows"); jr.append(el("span", "label", "The employee journey, start to finish"));
+    const tl = el("div", "timeline");
+    const former = c.reviews.filter((r) => r.status === "former");
+    const stepAvg = (vals) => { const v = vals.filter((x) => typeof x === "number"); return { a: avg(v), n: v.length }; };
+    [["1 · Hiring", stepAvg(c.reviews.map((r) => r.journey?.hire))], ["2 · Onboarding", stepAvg(c.reviews.map((r) => r.journey?.onboard))],
+     ["3 · Day to day", { a: c.avg, n: c.reviews.length }], ["4 · The exit", stepAvg(former.map((r) => r.journey?.exit))]].forEach(([k, st]) => {
+      const d = el("div", "step"); if (st.a != null) { d.style.setProperty("--sc", scoreColor(st.a)); d.style.setProperty("--scb", scoreTint(st.a)); }
+      d.append(el("span", "k", k), el("b", null, st.a == null ? "–" : st.a.toFixed(1)), el("span", null, st.n ? `${st.n} answer${st.n === 1 ? "" : "s"}` : "No answers yet"));
+      tl.append(d);
+    });
+    jr.append(tl);
+    const jg = el("div", "jgrid");
+    const prom = c.reviews.map((r) => r.journey?.promised).filter(Boolean);
+    const pbox = el("div", "rows"); pbox.append(el("span", "label", "Was the job what they promised?"));
+    if (prom.length) [["yes", "Yes", "var(--s5)"], ["partly", "Partly", "var(--s3)"], ["no", "No", "var(--s1)"]].forEach(([v, l, col]) => { const n = prom.filter((x) => x === v).length; pbox.append(mkRow(l, n, prom.length, Math.round(n / prom.length * 100) + "%", col)); });
+    else pbox.append(el("p", "note", "No answers yet."));
+    jg.append(pbox);
+    const fj = former.filter((r) => r.journey && (r.journey.sepType || r.journey.reasons));
+    const ebox = el("div", "rows"); ebox.append(el("span", "label", "How it ended and why people leave"));
+    if (fj.length >= MIN_RATINGS || (isOwner && fj.length)) {
+      if (fj.length < MIN_RATINGS) ebox.append(el("p", "note", "Hidden from everyone else until 5 former employees answer. You see it as the owner."));
+      const types = fj.map((r) => r.journey.sepType).filter(Boolean);
+      SEPTYPES.forEach(([v, l]) => { const n = types.filter((x) => x === v).length; if (n) ebox.append(mkRow(l, n, types.length, Math.round(n / types.length * 100) + "%", "var(--c-growth)")); });
+      const rc = {}; fj.forEach((r) => (r.journey.reasons || []).forEach((x) => { rc[x] = (rc[x] || 0) + 1; }));
+      const top = Object.entries(rc).sort((a, b) => b[1] - a[1]).slice(0, 6);
+      if (top.length) { ebox.append(el("span", "label", `Top reasons for leaving (of ${fj.length} former employees)`)); top.forEach(([v, n]) => ebox.append(mkRow(labelOf(REASONS, v), n, fj.length, Math.round(n / fj.length * 100) + "%", "var(--s1)"))); }
+    } else ebox.append(el("p", "note", `Shows once ${MIN_RATINGS} former employees answer (${fj.length} so far), so nobody can tell who left and why.`));
+    jg.append(ebox); jr.append(jg);
+    p.append(head, sum, jr, who, divs, aw, rv);
   }
 
   function openDetail(k) { openKey = k; $("formPanel").hidden = true; renderDetail(); $("list").hidden = true; $("detail").scrollIntoView({ block: "start", behavior: "smooth" }); }
@@ -1013,6 +1143,12 @@ footer .small { font-size: 13px; opacity: .85; }
     $("f-role").value = e?.role || ""; $("f-division").value = e?.division || ""; setRadio("flag", e?.flag || "same"); fillDivisionList(); $("f-pros").value = e?.pros || ""; $("f-cons").value = e?.cons || "";
     setRadio("status", e?.status || "current"); setRadio("award", e?.award || "unsure");
     e?.tenure ? setRadio("tenure", e.tenure) : clearRadio("tenure"); syncTenureLabel();
+    const j = e?.journey || {};
+    ["hire", "onboard", "exit"].forEach((k) => j[k] ? setRadio("j_" + k, j[k]) : clearRadio("j_" + k));
+    j.promised ? setRadio("promised", j.promised) : clearRadio("promised");
+    j.sepType ? setRadio("septype", j.sepType) : clearRadio("septype");
+    document.querySelectorAll('input[name="reason"]').forEach((i) => { i.checked = (j.reasons || []).includes(i.value); });
+    $("f-exitstory").value = j.story || ""; $("f-share").checked = !!j.share; syncReasons(); syncSep();
     e ? setRadio("overall", e.overall) : clearRadio("overall");
     CATS.forEach(([ck]) => e?.cats?.[ck] ? setRadio("c_" + ck, e.cats[ck]) : clearRadio("c_" + ck));
     editingKey = e ? k : null; showMeaning(); $("f-agree").checked = !!e;
@@ -1051,7 +1187,18 @@ footer .small { font-size: 13px; opacity: .85; }
     if (!$("f-agree").checked) { err.textContent = "Confirm you work or worked there and agree to the Terms and Privacy notice."; err.hidden = false; return; }
     if (!me) { err.textContent = "Sign in to claude.ai to post a rating."; err.hidden = false; return; }
     const cats = {}; CATS.forEach(([ck]) => { const v = Number(getRadio("c_" + ck)); if (v) cats[ck] = v; });
-    const entry = { company, role: $("f-role").value.trim(), division: $("f-division").value.trim().replace(/\s+/g, " "), flag: $("f-division").value.trim() ? (getRadio("flag") || "same") : "", status: getRadio("status"), tenure: getRadio("tenure"), overall, cats, pros: $("f-pros").value.trim(), cons: $("f-cons").value.trim(), award: getRadio("award") || "unsure", at: new Date().toISOString() };
+    const entry = { company, role: $("f-role").value.trim(), division: $("f-division").value.trim().replace(/\s+/g, " "), flag: $("f-division").value.trim() ? (getRadio("flag") || "same") : "", status: getRadio("status"), tenure: getRadio("tenure"), journey: (() => {
+      const j = {}; ["hire", "onboard"].forEach((k) => { const v = Number(getRadio("j_" + k)); if (v) j[k] = v; });
+      const pr = getRadio("promised"); if (pr) j.promised = pr;
+      if (getRadio("status") === "former") {
+        const ex = Number(getRadio("j_exit")); if (ex) j.exit = ex;
+        const st = getRadio("septype"); if (st) j.sepType = st;
+        const rs = [...document.querySelectorAll('input[name="reason"]:checked')].map((i) => i.value).slice(0, 3); if (rs.length) j.reasons = rs;
+        const story = $("f-exitstory").value.trim(); if (story) j.story = story;
+        j.share = $("f-share").checked;
+      }
+      return j;
+    })(), overall, cats, pros: $("f-pros").value.trim(), cons: $("f-cons").value.trim(), award: getRadio("award") || "unsure", at: new Date().toISOString() };
     const mineDoc = docs.find((d) => d.uid === me);
     const entries = { ...(mineDoc?.entries || {}) };
     if (editingKey && editingKey !== k) delete entries[editingKey];
@@ -1084,6 +1231,14 @@ footer .small { font-size: 13px; opacity: .85; }
     catch { $("formErr").textContent = "Couldn't delete. Try again."; $("formErr").hidden = false; }
   });
 
+  let voting = false;
+  async function castVote(key, choice) {
+    if (voting || !db || !me) return; voting = true;
+    const next = { ...myVotes, [key]: choice };
+    try { await db.doc("votes/" + me).set({ v: next }); myVotes = next; toast("Vote counted"); if (openKey) renderDetail(); }
+    catch { toast("Your vote didn't save. Try again."); }
+    finally { voting = false; }
+  }
   async function removeEntry(uid, k, btn) {
     if (btn.dataset.armed !== "1") { btn.dataset.armed = "1"; btn.textContent = "Confirm remove"; setTimeout(() => { btn.dataset.armed = ""; btn.textContent = "Remove"; }, 3000); return; }
     const d = docs.find((x) => x.uid === uid); if (!d) return;
@@ -1119,6 +1274,11 @@ footer .small { font-size: 13px; opacity: .85; }
     if (!me) canWrite = false;
     applyWriteGate();
     const timer = setTimeout(() => { $("status").textContent = docs.length ? "Showing saved ratings. They may be out of date." : "Can't reach the ratings yet. They'll appear when the connection comes back."; }, 10000);
+    db.collection("votes").onSnapshot((snap) => {
+      const t = {}; let mine = {};
+      snap.docs.forEach((d) => { const v = d.data()?.v || {}; if (d.id === me) mine = v; for (const [k, choice] of Object.entries(v)) { if (!POLL.some((p) => p[0] === choice)) continue; (t[k] = t[k] || {})[choice] = (t[k][choice] || 0) + 1; } });
+      tallies = t; myVotes = mine; if (openKey) renderDetail();
+    }, () => {});
     db.collection("reviews").onSnapshot((snap) => {
       if (!snap.metadata.fromCache) clearTimeout(timer);
       docs = snap.docs.map((s) => ({ uid: s.id, entries: s.data()?.entries || {} }));

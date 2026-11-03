@@ -17,6 +17,8 @@ In the break room, people get to be human, with all their imagination. They have
 - **Rate 1 to 5:** 1 Get out · 2 Bad · 3 It's a job · 4 Good · 5 Great, each with a plain-language meaning
 - **Five categories:** pay & benefits, management, work-life balance, culture & respect, growth
 - **Time at the company:** every rating shows how long the person has worked there and whether they still do, so experience carries weight
+- **The full journey:** rate the hiring process, onboarding, day to day and how the exit was handled; say whether the job was what they promised, how it ended and why
+- **Readers decide:** when a former employee shares how their job ended, readers vote on who had room to do better: the employee, the employer, both or neither
 - **Divisions and groups:** flag a division, team or location as better or worse than the rest of the company
 - **Award check:** would the people who work there agree with a "Best Employer" award?
 - **What people say, score by score:** comments grouped by rating, longest-serving employees first
