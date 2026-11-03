@@ -10,7 +10,7 @@ In the break room, virtual or not, employees say how their employer really treat
 
 In the break room, people get to be human, with all their imagination. They have the fix for that broken diagnostic tool they use every day, the one they're tired of raising with a manager who never does anything about it. They're over it. But in the break room there are no constraints. They rest, and they say how their jobs could be better and more efficient when no manager is listening. And honestly, even if one were, they wouldn't understand.
 
-**This is that room. Open to everyone, and on the record.** One difference from the real break room: here you talk about the company, the team and the tools, never a person by name. That's what keeps you protected.
+**This is that room. Open to everyone, and off the record.** One difference from the real break room: here you talk about the company, the team and the tools, never a person by name. That's what keeps you protected.
 
 ## What it does
 
@@ -22,7 +22,10 @@ In the break room, people get to be human, with all their imagination. They have
 - **What people say, score by score:** comments grouped by rating, longest-serving employees first
 - **The research:** what bad working conditions cost in stress, health and life expectancy, with sources
 
-## Built to protect the people who rate
+## Your privacy comes first
+
+This room only works if people can say it all. So vent: that's what the room is for.
+
 
 - One rating per person per employer, so no company can flood its own page
 - Names, emails and photos are never shown with ratings

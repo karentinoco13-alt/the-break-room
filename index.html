@@ -292,6 +292,18 @@ label[for="f-pros"] { color: var(--s5); font-weight: 700; } label[for="f-cons"] 
 .preview p { margin: 0; max-width: 64ch; font-size: 16px; }
 .preview a { color: var(--sun); font-weight: 700; }
 .preview .scale { margin-top: 4px; }
+.privacy { border-radius: 14px; padding: 24px; background: color-mix(in srgb, var(--s5) 12%, var(--paper)); border: 3px solid var(--s5); display: grid; gap: 18px; }
+.privacy-head { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.lock { width: 54px; height: 54px; border-radius: 14px; background: var(--s5); display: grid; place-items: center; flex: none; }
+.lock svg { width: 30px; height: 30px; }
+.privacy h2 { font-size: clamp(28px, 5vw, 40px); font-weight: 900; font-stretch: 75%; line-height: 1; color: var(--ink); }
+.privacy-head p { margin: 4px 0 0; font-size: 16px; max-width: 60ch; }
+.promises { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 10px; margin: 0; padding: 0; list-style: none; }
+.promises li { background: var(--paper); border-radius: 12px; padding: 14px 16px; display: grid; gap: 4px; border-left: 5px solid var(--s5); }
+.promises b { font-family: var(--f-display); font-weight: 800; font-stretch: 88%; font-size: 18px; }
+.promises span { font-size: 14px; color: var(--muted); }
+.vent { margin: 0; font-size: 17px; font-weight: 700; }
+.vent em { font-style: normal; color: var(--pop); }
 .legal { background: var(--paper); border: 2px solid var(--rule); border-radius: 14px; overflow: hidden; }
 .legal > summary { cursor: pointer; padding: 16px 20px; font-family: var(--f-display); font-weight: 800; font-stretch: 85%; font-size: 20px; color: var(--hero); list-style: none; display: flex; justify-content: space-between; gap: 12px; }
 .legal > summary::after { content: "+"; font-size: 24px; line-height: 1; color: var(--pop); }
@@ -357,11 +369,30 @@ footer .small { font-size: 13px; opacity: .85; }
     <div class="spectrum" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
   </header>
 
+  <section class="privacy" id="privacy" aria-labelledby="privacyTitle">
+    <div class="privacy-head">
+      <div class="lock" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10.5" width="16" height="10.5" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg></div>
+      <div>
+        <h2 id="privacyTitle">Your privacy comes first</h2>
+        <p>This room only works if you can say it all. So it's built to keep you out of sight.</p>
+      </div>
+    </div>
+    <ul class="promises">
+      <li><b>Your name is never shown</b><span>Not on your rating, not anywhere. Ratings carry no name, email or photo.</span></li>
+      <li><b>Your employer can't see who wrote it</b><span>No company gets your identity, and no company can buy, hide or edit a rating.</span></li>
+      <li><b>Safety in numbers</b><span>Nothing about a company shows until 5 people rate it. Teams and locations need 5 too.</span></li>
+      <li><b>You share only what you choose</b><span>Role, team and comments are all optional. Skip anything that feels too close.</span></li>
+      <li><b>No ads, no tracking, never sold</b><span>No tracking cookies, no analytics, no data sales. Ever.</span></li>
+      <li><b>Delete it all, any time</b><span>Edit or delete your rating, or erase everything you've posted with one button.</span></li>
+    </ul>
+    <p class="vent">So vent. Say what you'd say in the real break room. <em>That's what this room is for.</em></p>
+  </section>
+
   <section class="story" aria-labelledby="storyTitle">
     <h2 id="storyTitle">Why it's called The Break Room</h2>
     <p>In the break room, virtual or not, employees say how their employer really treats them. The ratings are savage. Nobody holds back. They talk about the manager who didn't stand up for them, and the tools that are clunky and useless, even though nobody said so during training.</p>
     <p>In the break room, people get to be human, with all their imagination. They have the fix for that broken diagnostic tool they use every day, the one they're tired of raising with a manager who never does anything about it. They're over it. But in the break room there are no constraints. They rest, and they say how their jobs could be better and more efficient when no manager is listening. And honestly, even if one were, they wouldn't understand.</p>
-    <p class="kicker">This is that room. Open to everyone, and on the record.</p>
+    <p class="kicker">This is that room. Open to everyone, and off the record.</p>
     <p class="rule-note">One difference from the real break room: here you talk about the company, the team and the tools, never a person by name. That's what keeps you protected.</p>
   </section>
 
@@ -466,7 +497,7 @@ footer .small { font-size: 13px; opacity: .85; }
         </div>
       </div>
 
-      <p class="rules">Rate the company, not a person. Leave out names of coworkers or managers, phone numbers, and anything that could identify you or someone else. Your name is never shown. You get one rating per employer, and you can edit or delete it later.</p>
+      <p class="rules"><b>Say it all. Your name is never shown.</b> To stay invisible, leave out details only you would know, like an exact date or a one-of-a-kind incident. Rate the company, the team and the tools, never a person by name. You get one rating per employer, and you can edit or delete it any time.</p>
       <label class="agree" for="f-agree"><input type="checkbox" id="f-agree"> <span>I'm a current or former employee of this company, this is my own honest experience, and I agree to the <button type="button" class="linkish" id="openLegal">Terms and Privacy notice</button>.</span></label>
       <p class="err" id="formErr" hidden></p>
       <div class="bar">
@@ -592,12 +623,12 @@ footer .small { font-size: 13px; opacity: .85; }
     <div class="gate-body" id="gateMain">
       <p>Please read this summary of the Terms of use. You need to accept them before you can use the app.</p>
       <ul class="gate-list">
+        <li><b>Your privacy comes first.</b> Your name, email and photo are never shown with a rating, and no employer can see who wrote it. Ratings are stored with an anonymous account ID by the service that hosts this app.</li>
         <li><b>Free while testing.</b> The Break Room is free to use while it's being tested for feedback. Your feedback goes only to the app's developer and is used to plan future versions.</li>
         <li><b>Honest, first-hand ratings.</b> Only rate an employer you work or worked for, based on your own experience. No paid, rewarded or fake ratings.</li>
         <li><b>Safety in numbers.</b> An employer's scores and comments appear only after 5 people have rated it.</li>
         <li><b>Rate the company, not people.</b> Don't name coworkers or managers or post anything that identifies someone.</li>
         <li><b>Opinions, not facts.</b> Ratings are the views of the people who wrote them. They are not verified, and the app is not affiliated with any employer listed.</li>
-        <li><b>Your data.</b> Ratings are stored by the service that hosts this app with an anonymous account ID. Your name, email and photo are never stored or shown.</li>
         <li><b>Deleting is permanent.</b> You can delete your ratings and feedback at any time. Deleted data cannot be recovered.</li>
         <li><b>Provided as is.</b> The app is provided "as is" and "as available", without warranties of any kind. To the extent the law allows, its developer is not liable for any direct or indirect loss arising from its use.</li>
         <li><b>Copyright.</b> © 2026 Karen Tinoco. Licensed under PolyForm Noncommercial 1.0.0. Commercial use by permission only.</li>
