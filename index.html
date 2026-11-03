@@ -274,6 +274,11 @@ label[for="f-pros"] { color: var(--s5); font-weight: 700; } label[for="f-cons"] 
 .story p { margin: 0; font-size: 16px; max-width: 68ch; position: relative; }
 .story .kicker { font-weight: 700; color: var(--pop); }
 .story .rule-note { font-size: 14px; color: var(--muted); border-top: 2px dashed var(--rule); padding-top: 12px; }
+.preview { border-radius: 14px; padding: 22px 24px; background: var(--hero); color: #fff; display: grid; gap: 10px; border-bottom: 6px solid var(--sun); }
+.preview h2 { font-size: clamp(26px, 5vw, 38px); font-weight: 900; font-stretch: 75%; color: var(--sun); }
+.preview p { margin: 0; max-width: 64ch; font-size: 16px; }
+.preview a { color: var(--sun); font-weight: 700; }
+.preview .scale { margin-top: 4px; }
 .legal { background: var(--paper); border: 2px solid var(--rule); border-radius: 14px; overflow: hidden; }
 .legal > summary { cursor: pointer; padding: 16px 20px; font-family: var(--f-display); font-weight: 800; font-stretch: 85%; font-size: 20px; color: var(--hero); list-style: none; display: flex; justify-content: space-between; gap: 12px; }
 .legal > summary::after { content: "+"; font-size: 24px; line-height: 1; color: var(--pop); }
@@ -345,6 +350,13 @@ footer .small { font-size: 13px; opacity: .85; }
     <p>In the break room, people get to be human, with all their imagination. They have the fix for that broken diagnostic tool they use every day, the one they're tired of raising with a manager who never does anything about it. They're over it. But in the break room there are no constraints. They rest, and they say how their jobs could be better and more efficient when no manager is listening. And honestly, even if one were, they wouldn't understand.</p>
     <p class="kicker">This is that room. Open to everyone, and on the record.</p>
     <p class="rule-note">One difference from the real break room: here you talk about the company, the team and the tools, never a person by name. That's what keeps you protected.</p>
+  </section>
+
+  <section class="preview" id="preview" hidden aria-labelledby="previewTitle">
+    <span class="label" style="color:#fff;opacity:.8">Public preview</span>
+    <h2 id="previewTitle">Ratings open soon</h2>
+    <p>The Break Room is putting the finishing touches on secure sign-in and storage, so your ratings stay anonymous and nobody can flood the board. Until then, read how it works, what each score means, and what the research says about bad employers.</p>
+    <p>Follow the project on <a href="https://github.com/karentinoco13-alt/the-break-room" target="_blank" rel="noopener">GitHub</a> to know when it opens.</p>
   </section>
 
   <div class="bar" id="bar">
@@ -1051,7 +1063,10 @@ footer .small { font-size: 13px; opacity: .85; }
   (async () => {
     const [d, user] = await Promise.all([window.claude?.use?.("db") ?? null, window.claude?.use?.("user") ?? null]);
     db = d;
-    if (!db) { $("status").textContent = "Ratings can't load here. Open this page on claude.ai while signed in."; $("rateBtn").hidden = true; return; }
+    if (!db) {
+      if (!window.claude) { $("preview").hidden = false; $("bar").hidden = true; $("status").hidden = true; $("list").hidden = true; return; }
+      $("status").textContent = "Ratings can't load here. Open this page on claude.ai while signed in."; $("rateBtn").hidden = true; return;
+    }
     if (user) {
       try { me = await user.id(); } catch {}
       try { isOwner = !!(await user.isOwner()); } catch {}
