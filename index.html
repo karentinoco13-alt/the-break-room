@@ -1,0 +1,1061 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px/1.5 system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>The Break Room</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: a loud time-clock board. A full-color hero badge with a 1–5 spectrum stripe, a toolbar, then score-tinted timecards; detail and form open as full-width cards. */
+:root {
+  --bg: #f4f1ff;
+  --bg2: #fff4ec;
+  --paper: #ffffff;
+  --ink: #1a1440;
+  --muted: #5e5880;
+  --rule: #e2dcf5;
+  --hero: #2a1b8f;
+  --hero-ink: #ffffff;
+  --sun: #ffd23f;
+  --pop: #ff2e88;
+  --pop-ink: #ffffff;
+  --accent: #ff2e88;
+  --accent-ink: #ffffff;
+  --s1: #e5202e; --s2: #ff7a1a; --s3: #e0a800; --s4: #2fb34a; --s5: #0a9e6e;
+  --s1-bg: #ffe3e5; --s2-bg: #ffeadb; --s3-bg: #fff4c7; --s4-bg: #ddf6e2; --s5-bg: #d3f5ea;
+  --c-pay: #0aa5a5; --c-mgmt: #3b5bff; --c-balance: #8a3ffc; --c-culture: #ff2e88; --c-growth: #ff7a1a;
+  --f-display: "Archivo", "Arial Narrow", Arial, sans-serif;
+  --f-body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #120d2e; --bg2: #1d0f24; --paper: #1d1744; --ink: #f3f0ff; --muted: #b2abd6; --rule: #362d6b;
+  --hero: #3a24c9; --hero-ink: #ffffff; --sun: #ffd23f; --pop: #ff4f9d; --pop-ink: #ffffff;
+  --accent: #ff4f9d; --accent-ink: #ffffff;
+  --s1: #ff5c66; --s2: #ff9a4d; --s3: #ffd23f; --s4: #5fd877; --s5: #2fe0a6;
+  --s1-bg: #461a2a; --s2-bg: #45261c; --s3-bg: #41361a; --s4-bg: #1a3d2c; --s5-bg: #0f3d34;
+  --c-pay: #2fd6d6; --c-mgmt: #7d93ff; --c-balance: #b384ff; --c-culture: #ff6fae; --c-growth: #ff9a4d;
+  color-scheme: dark;
+} }
+:root[data-theme="dark"] {
+  --bg: #120d2e; --bg2: #1d0f24; --paper: #1d1744; --ink: #f3f0ff; --muted: #b2abd6; --rule: #362d6b;
+  --hero: #3a24c9; --hero-ink: #ffffff; --sun: #ffd23f; --pop: #ff4f9d; --pop-ink: #ffffff;
+  --accent: #ff4f9d; --accent-ink: #ffffff;
+  --s1: #ff5c66; --s2: #ff9a4d; --s3: #ffd23f; --s4: #5fd877; --s5: #2fe0a6;
+  --s1-bg: #461a2a; --s2-bg: #45261c; --s3-bg: #41361a; --s4-bg: #1a3d2c; --s5-bg: #0f3d34;
+  --c-pay: #2fd6d6; --c-mgmt: #7d93ff; --c-balance: #b384ff; --c-culture: #ff6fae; --c-growth: #ff9a4d;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); background-image: linear-gradient(160deg, var(--bg) 0%, var(--bg2) 100%); background-attachment: fixed; color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.5; min-height: 100%; }
+.wrap { max-width: 1080px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 24px 64px; display: flex; flex-direction: column; gap: 24px; }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; }
+button, input, textarea, select { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--pop); outline-offset: 2px; }
+.label { font-family: var(--f-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+
+/* hero */
+header { background: var(--hero); color: var(--hero-ink); border-radius: 14px; overflow: hidden; display: grid; position: relative; }
+header::after { content: ""; position: absolute; right: -60px; top: -60px; width: 220px; height: 220px; border-radius: 50%; background: var(--pop); opacity: .9; }
+header::before { content: ""; position: absolute; right: 90px; top: 70px; width: 90px; height: 90px; border-radius: 50%; background: var(--sun); }
+.hero-in { display: grid; gap: 16px; padding: 28px 28px 24px; position: relative; z-index: 1; }
+.mast { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px; }
+h1 { font-size: clamp(44px, 9vw, 86px); font-weight: 900; font-stretch: 68%; line-height: .88; letter-spacing: -.01em; text-transform: uppercase; }
+h1 .a { color: var(--sun); } h1 .b { color: #ffffff; -webkit-text-stroke: 0; text-shadow: 4px 4px 0 var(--pop); }
+.tag { max-width: 60ch; font-size: 17px; margin: 0; color: var(--hero-ink); opacity: .95; }
+.tag b { font-weight: 700; color: var(--sun); }
+.spectrum { display: grid; grid-template-columns: repeat(5, 1fr); height: 12px; position: relative; z-index: 1; }
+.spectrum span:nth-child(1) { background: var(--s1); } .spectrum span:nth-child(2) { background: var(--s2); } .spectrum span:nth-child(3) { background: var(--s3); } .spectrum span:nth-child(4) { background: var(--s4); } .spectrum span:nth-child(5) { background: var(--s5); }
+.scale { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; font-family: var(--f-mono); font-size: 12px; font-weight: 700; padding: 3px 9px; border-radius: 999px; }
+.chip[data-s="1"] { background: var(--s1-bg); color: var(--s1); }
+.chip[data-s="2"] { background: var(--s2-bg); color: var(--s2); }
+.chip[data-s="3"] { background: var(--s3-bg); color: var(--s3); }
+.chip[data-s="4"] { background: var(--s4-bg); color: var(--s4); }
+.chip[data-s="5"] { background: var(--s5-bg); color: var(--s5); }
+.scale .chip { color: #fff; } .scale .chip[data-s="3"] { color: #2a2000; }
+.scale .chip[data-s="1"] { background: var(--s1); } .scale .chip[data-s="2"] { background: var(--s2); } .scale .chip[data-s="3"] { background: var(--s3); } .scale .chip[data-s="4"] { background: var(--s4); } .scale .chip[data-s="5"] { background: var(--s5); }
+.chip.mine { background: var(--pop); color: var(--pop-ink); }
+
+/* toolbar */
+.bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.search { flex: 1 1 240px; min-width: 0; padding: 12px 16px; border: 2px solid var(--rule); background: var(--paper); border-radius: 999px; }
+.search:focus { border-color: var(--pop); outline: none; }
+select.sort { padding: 12px 14px; border: 2px solid var(--rule); background: var(--paper); border-radius: 999px; }
+.btn { border: 0; cursor: pointer; padding: 12px 22px; border-radius: 999px; font-weight: 700; background: var(--accent); color: var(--accent-ink); box-shadow: 0 3px 0 color-mix(in srgb, var(--accent) 60%, #000); }
+.btn:hover { filter: brightness(1.08); }
+.btn:active { transform: translateY(2px); box-shadow: none; }
+.btn.ghost { background: var(--paper); color: var(--ink); border: 2px solid var(--rule); box-shadow: none; }
+.btn.sun { background: var(--sun); color: #2a2000; box-shadow: 0 3px 0 #b88f00; }
+.btn.danger { background: transparent; color: var(--s1); border: 2px solid var(--s1); padding: 6px 12px; font-size: 13px; box-shadow: none; }
+.btn[disabled] { opacity: .5; cursor: not-allowed; }
+.note { font-size: 13px; color: var(--muted); }
+
+/* timecard grid */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 16px; }
+.card { background: var(--scb, var(--paper)); border: 2px solid color-mix(in srgb, var(--sc, var(--rule)) 35%, transparent); border-radius: 14px; padding: 18px 18px 16px; display: grid; grid-template-columns: 1fr auto; gap: 4px 14px; text-align: left; cursor: pointer; position: relative; overflow: hidden; color: var(--ink); }
+.card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 7px; background: var(--sc, var(--rule)); }
+.card:hover { border-color: var(--sc); }
+.card h3 { font-size: 23px; font-weight: 800; font-stretch: 85%; line-height: 1.1; min-width: 0; overflow-wrap: anywhere; padding-top: 4px; }
+.score { font-family: var(--f-display); font-weight: 900; font-stretch: 70%; font-size: 30px; line-height: 1; color: #fff; background: var(--sc); font-variant-numeric: tabular-nums; grid-row: span 2; text-align: center; border-radius: 12px; padding: 10px 12px 8px; align-self: start; box-shadow: 0 3px 0 color-mix(in srgb, var(--sc) 60%, #000); }
+.score small { display: block; font-size: 11px; font-family: var(--f-mono); font-weight: 700; opacity: .9; }
+.meta { font-size: 13px; color: var(--muted); }
+.dist { grid-column: 1 / -1; display: flex; gap: 2px; height: 10px; border-radius: 5px; overflow: hidden; background: color-mix(in srgb, var(--ink) 10%, transparent); margin-top: 10px; }
+.dist span { display: block; height: 100%; }
+.verdict { grid-column: 1 / -1; font-size: 13px; margin-top: 8px; font-weight: 600; display: flex; gap: 6px; align-items: center; }
+.verdict::before { content: "🏆"; }
+
+/* empty */
+.empty { background: var(--paper); border: 2px dashed var(--pop); border-radius: 14px; padding: 28px; display: grid; gap: 18px; }
+.empty h2 { font-size: 30px; font-stretch: 80%; font-weight: 900; color: var(--hero); }
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; counter-reset: st; }
+.steps li { display: grid; gap: 4px; padding: 16px; border-radius: 12px; background: var(--stb); counter-increment: st; }
+.steps li::before { content: counter(st); display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--stc); color: #fff; font-family: var(--f-display); font-weight: 900; font-size: 18px; margin-bottom: 4px; }
+.steps li:nth-child(1) { --stc: var(--pop); --stb: color-mix(in srgb, var(--pop) 12%, var(--paper)); }
+.steps li:nth-child(2) { --stc: var(--c-mgmt); --stb: color-mix(in srgb, var(--c-mgmt) 12%, var(--paper)); }
+.steps li:nth-child(3) { --stc: var(--s4); --stb: color-mix(in srgb, var(--s4) 14%, var(--paper)); }
+.steps b { font-family: var(--f-display); font-stretch: 85%; font-size: 18px; }
+.empty-scale { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.empty-scale div { border-radius: 10px; padding: 10px 6px; text-align: center; color: #fff; font-weight: 700; font-size: 12px; }
+.empty-scale b { display: block; font-family: var(--f-display); font-size: 30px; font-weight: 900; line-height: 1; }
+.empty-scale div:nth-child(3) { color: #2a2000; }
+
+/* panels */
+.panel { background: var(--paper); border: 2px solid var(--rule); border-radius: 14px; padding: 24px; display: grid; gap: 22px; position: relative; overflow: hidden; }
+#detail { border-color: color-mix(in srgb, var(--sc) 50%, transparent); }
+#detail::before, #formPanel::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 8px; background: var(--sc, var(--pop)); }
+#formPanel::before { background: linear-gradient(90deg, var(--s1), var(--s2), var(--s3), var(--s4), var(--s5)); }
+.panel-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.panel h2 { font-size: clamp(30px, 5vw, 46px); font-weight: 900; font-stretch: 75%; line-height: 1; overflow-wrap: anywhere; }
+.summary { display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: start; }
+@media (max-width: 640px) { .summary { grid-template-columns: 1fr; } }
+.bigbox { background: var(--sc); color: #fff; border-radius: 16px; padding: 18px 22px; display: grid; gap: 4px; justify-items: start; min-width: 170px; box-shadow: 0 4px 0 color-mix(in srgb, var(--sc) 60%, #000); }
+.big { font-family: var(--f-display); font-weight: 900; font-stretch: 65%; font-size: 96px; line-height: .85; font-variant-numeric: tabular-nums; }
+.bigbox .meta { color: #fff; opacity: .92; }
+.bigbox .word { font-family: var(--f-display); font-weight: 800; font-size: 22px; font-stretch: 85%; }
+.rows { display: grid; gap: 8px; min-width: 0; }
+.row { display: grid; grid-template-columns: 140px 1fr 44px; gap: 10px; align-items: center; font-size: 14px; }
+.row .track { height: 12px; background: color-mix(in srgb, var(--ink) 8%, transparent); border-radius: 6px; overflow: hidden; }
+.row .fill { height: 100%; border-radius: 6px; }
+.row .v { font-family: var(--f-mono); font-size: 13px; text-align: right; font-variant-numeric: tabular-nums; font-weight: 700; }
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 7px; vertical-align: 1px; }
+.award { background: var(--sun); color: #2a2000; border-radius: 14px; padding: 16px 18px; display: grid; gap: 6px; max-width: 560px; box-shadow: 0 4px 0 #b88f00; }
+.award .label, .award .note { color: #4d3d00; }
+.award strong { font-family: var(--f-display); font-stretch: 80%; font-size: 24px; line-height: 1.1; }
+.award-meter { display: flex; height: 14px; border-radius: 7px; overflow: hidden; background: #fff6; }
+.award-meter .y { background: var(--s5); } .award-meter .n { background: var(--s1); }
+
+.reviews { display: grid; gap: 12px; }
+.review { border-radius: 12px; padding: 14px 16px; display: grid; gap: 10px; background: var(--rb); border-left: 6px solid var(--rc); }
+.review-top { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
+.pc { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 560px) { .pc { grid-template-columns: 1fr; } }
+.pc div { min-width: 0; overflow-wrap: anywhere; white-space: pre-wrap; }
+.pc .label { display: block; margin-bottom: 2px; font-weight: 700; }
+.pc .good .label { color: var(--s5); } .pc .bad .label { color: var(--s1); }
+
+/* form */
+form { display: grid; gap: 22px; }
+.fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+.field { display: grid; gap: 6px; min-width: 0; }
+.field input, .field textarea, .field select { padding: 11px 13px; border: 2px solid var(--rule); background: var(--bg); border-radius: 10px; width: 100%; }
+.field input:focus, .field textarea:focus { border-color: var(--pop); outline: none; }
+.field textarea { min-height: 100px; resize: vertical; }
+#f-pros { border-color: color-mix(in srgb, var(--s5) 45%, var(--rule)); background: color-mix(in srgb, var(--s5) 7%, var(--paper)); }
+#f-cons { border-color: color-mix(in srgb, var(--s1) 45%, var(--rule)); background: color-mix(in srgb, var(--s1) 7%, var(--paper)); }
+label[for="f-pros"] { color: var(--s5); font-weight: 700; } label[for="f-cons"] { color: var(--s1); font-weight: 700; }
+.punch { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.punch label { position: relative; }
+.punch input { position: absolute; opacity: 0; inset: 0; }
+.punch span { display: grid; place-items: center; gap: 2px; padding: 12px 4px; border: 2px solid color-mix(in srgb, var(--pc) 45%, transparent); border-radius: 12px; cursor: pointer; text-align: center; background: var(--pcb); color: var(--pc); }
+.punch span b { font-family: var(--f-display); font-weight: 900; font-stretch: 70%; font-size: 32px; line-height: 1; }
+.punch span i { font-style: normal; font-size: 11px; font-weight: 700; }
+.punch label:hover span { border-color: var(--pc); }
+.punch input:focus-visible + span { outline: 3px solid var(--pop); outline-offset: 2px; }
+.punch input:checked + span { border-color: var(--pc); background: var(--pc); color: #fff; box-shadow: 0 3px 0 color-mix(in srgb, var(--pc) 60%, #000); transform: translateY(-2px); }
+.mini { display: grid; gap: 10px; }
+.mini-row { display: grid; grid-template-columns: 170px 1fr; gap: 10px; align-items: center; font-weight: 600; }
+@media (max-width: 520px) { .mini-row { grid-template-columns: 1fr; gap: 4px; } }
+.mini .punch { gap: 6px; }
+.mini .punch span { padding: 6px 2px; border-radius: 9px; }
+.mini .punch span b { font-size: 18px; }
+.seg { display: flex; flex-wrap: wrap; gap: 8px; }
+.seg label { position: relative; }
+.seg input { position: absolute; opacity: 0; inset: 0; }
+.seg span { display: inline-block; padding: 9px 16px; border: 2px solid var(--rule); border-radius: 999px; cursor: pointer; font-size: 14px; font-weight: 600; background: var(--paper); }
+.seg input:checked + span { border-color: var(--segc, var(--hero)); background: var(--segc, var(--hero)); color: #fff; }
+.seg input:focus-visible + span { outline: 3px solid var(--pop); outline-offset: 2px; }
+#st-cur + span { --segc: var(--s5); } #st-for + span { --segc: var(--c-growth); }
+#tenureSeg input:checked + span { --segc: var(--c-mgmt); }
+.who { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 16px; }
+.who > .rows { align-content: start; }
+.who-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; align-content: start; }
+.who-tile { border-radius: 12px; padding: 12px 14px; background: color-mix(in srgb, var(--tc) 12%, var(--paper)); border-top: 5px solid var(--tc); display: grid; gap: 2px; }
+.who-tile b { font-family: var(--f-display); font-weight: 900; font-stretch: 75%; font-size: 30px; line-height: 1; color: var(--tc); font-variant-numeric: tabular-nums; }
+.who-tile span { font-size: 13px; }
+.cred { display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px 5px 8px; border-radius: 999px; background: color-mix(in srgb, var(--c-mgmt) calc(8% + var(--lvl) * 5%), var(--paper)); border: 1.5px solid color-mix(in srgb, var(--c-mgmt) calc(25% + var(--lvl) * 12%), transparent); font-size: 13px; font-weight: 700; color: var(--ink); }
+.cred .meter { display: inline-grid; grid-template-columns: repeat(5, 5px); gap: 2px; align-items: end; height: 14px; }
+.cred .meter i { display: block; width: 5px; border-radius: 2px; background: color-mix(in srgb, var(--ink) 15%, transparent); }
+.cred .meter i:nth-child(1) { height: 5px; } .cred .meter i:nth-child(2) { height: 7px; } .cred .meter i:nth-child(3) { height: 9px; } .cred .meter i:nth-child(4) { height: 11px; } .cred .meter i:nth-child(5) { height: 14px; }
+.cred .meter i.on { background: var(--c-mgmt); }
+.status-chip { font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; color: #fff; background: var(--stc); }
+.exp { grid-column: 1 / -1; font-size: 13px; color: var(--ink); margin-top: 6px; display: flex; align-items: center; gap: 8px; }
+.exp .cred { padding: 3px 9px 3px 6px; font-size: 12px; }
+.selfrep { font-size: 11px; color: var(--muted); font-style: italic; }
+.div-box { display: grid; gap: 10px; padding: 14px; border-radius: 12px; background: color-mix(in srgb, var(--c-culture) 7%, var(--paper)); border: 2px dashed color-mix(in srgb, var(--c-culture) 40%, transparent); }
+#fl-better + span { --segc: var(--s5); } #fl-same + span { --segc: var(--c-balance); } #fl-worse + span { --segc: var(--s1); }
+.divs { display: grid; gap: 10px; }
+.div-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 14px; align-items: center; padding: 12px 14px; border-radius: 12px; background: var(--scb, var(--paper)); border-left: 6px solid var(--sc, var(--rule)); }
+.div-row h4 { margin: 0; font-family: var(--f-display); font-weight: 800; font-stretch: 85%; font-size: 19px; overflow-wrap: anywhere; }
+.div-row .dscore { font-family: var(--f-display); font-weight: 900; font-stretch: 70%; font-size: 30px; color: var(--sc); line-height: 1; grid-row: span 2; font-variant-numeric: tabular-nums; }
+.flags { display: flex; flex-wrap: wrap; gap: 6px; }
+.flag { font-size: 12px; font-weight: 700; padding: 3px 9px; border-radius: 999px; color: #fff; background: var(--fc); }
+.div-row.locked { background: var(--paper); border-left-color: var(--rule); border: 2px dashed var(--rule); }
+.div-chip { font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: color-mix(in srgb, var(--c-culture) 15%, var(--paper)); color: var(--ink); border: 1.5px solid color-mix(in srgb, var(--c-culture) 45%, transparent); }
+.flagline { grid-column: 1 / -1; font-size: 13px; font-weight: 600; margin-top: 6px; color: var(--s1); }
+#aw-yes + span { --segc: var(--s5); } #aw-no + span { --segc: var(--s1); } #aw-uns + span { --segc: var(--c-balance); }
+.rules { font-size: 13px; color: var(--ink); background: color-mix(in srgb, var(--c-mgmt) 10%, var(--paper)); border-radius: 10px; padding: 12px 14px; margin: 0; }
+.err { color: var(--s1); font-size: 14px; font-weight: 600; }
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(20px + env(safe-area-inset-bottom, 0px)); background: var(--pop); color: var(--pop-ink); padding: 11px 20px; border-radius: 999px; font-weight: 700; z-index: 20; box-shadow: 0 6px 20px color-mix(in srgb, var(--pop) 40%, transparent); }
+.legend { background: var(--paper); border: 2px solid var(--rule); border-radius: 14px; padding: 22px; display: grid; gap: 14px; }
+.legend h2 { font-size: 28px; font-weight: 900; font-stretch: 80%; color: var(--hero); }
+.legend-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: 10px; }
+.lv { border-radius: 12px; padding: 14px; display: grid; gap: 6px; align-content: start; background: var(--lb); border-top: 6px solid var(--lc); }
+.lv b { font-family: var(--f-display); font-weight: 900; font-stretch: 75%; font-size: 24px; line-height: 1; color: var(--lc); }
+.lv span { font-size: 13.5px; }
+.meaning { border-radius: 10px; padding: 10px 14px; font-size: 14px; background: var(--lb, color-mix(in srgb, var(--ink) 6%, transparent)); border-left: 5px solid var(--lc, var(--rule)); }
+.levels { display: grid; gap: 14px; }
+.level { border-radius: 14px; background: var(--lb); padding: 16px; display: grid; gap: 10px; border: 2px solid color-mix(in srgb, var(--lc) 35%, transparent); }
+.level-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; }
+.level-head b { font-family: var(--f-display); font-weight: 900; font-stretch: 75%; font-size: 26px; color: var(--lc); line-height: 1; }
+.level-head .cnt { font-family: var(--f-mono); font-size: 12px; font-weight: 700; background: var(--lc); color: #fff; border-radius: 999px; padding: 2px 9px; }
+.level-def { font-size: 13.5px; color: var(--muted); margin: 0; }
+.level.none { opacity: .7; padding-block: 10px; }
+.level .review { background: var(--paper); }
+.card.pending { background: var(--paper); border: 2px dashed var(--rule); cursor: pointer; }
+.card.pending::before { background: repeating-linear-gradient(90deg, var(--s1) 0 20%, var(--s2) 20% 40%, var(--s3) 40% 60%, var(--s4) 60% 80%, var(--s5) 80% 100%); opacity: .35; }
+.pips { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(var(--min), 1fr); gap: 4px; margin-top: 10px; }
+.pips span { height: 10px; border-radius: 5px; background: color-mix(in srgb, var(--ink) 10%, transparent); }
+.pips span.on { background: var(--c-balance); }
+.lock { grid-column: 1 / -1; font-size: 13px; color: var(--muted); margin-top: 6px; }
+.lock-badge { font-family: var(--f-mono); font-size: 12px; font-weight: 700; color: var(--c-balance); background: color-mix(in srgb, var(--c-balance) 14%, var(--paper)); border-radius: 999px; padding: 4px 10px; align-self: start; grid-row: span 2; }
+.group-title { grid-column: 1 / -1; display: grid; gap: 2px; margin-top: 10px; }
+.group-title h2 { font-size: 24px; font-weight: 900; font-stretch: 80%; color: var(--c-balance); }
+.pending-box { border-radius: 14px; padding: 18px; background: color-mix(in srgb, var(--c-balance) 10%, var(--paper)); border: 2px dashed var(--c-balance); display: grid; gap: 10px; }
+.pending-box strong { font-family: var(--f-display); font-size: 26px; font-weight: 900; font-stretch: 80%; color: var(--c-balance); }
+.pending-box .pips { grid-column: auto; max-width: 420px; }
+.owner-banner { border-radius: 10px; padding: 10px 14px; background: color-mix(in srgb, var(--c-balance) 12%, var(--paper)); border-left: 5px solid var(--c-balance); font-size: 14px; }
+.health { border-radius: 14px; overflow: hidden; display: grid; background: var(--paper); border: 2px solid var(--rule); }
+.health-head { background: linear-gradient(120deg, var(--s1), color-mix(in srgb, var(--s1) 55%, var(--hero))); color: #fff; padding: 22px 22px 20px; display: grid; gap: 8px; }
+.health-head h2 { font-size: clamp(28px, 5vw, 40px); font-weight: 900; font-stretch: 75%; line-height: 1; }
+.health-head p { margin: 0; max-width: 62ch; font-size: 15px; }
+.health-body { padding: 20px 22px 22px; display: grid; gap: 22px; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: 12px; }
+.stat { border-radius: 12px; padding: 14px 16px; background: color-mix(in srgb, var(--hc) 10%, var(--paper)); border-top: 5px solid var(--hc); display: grid; gap: 6px; align-content: start; }
+@media (min-width: 960px) { .stats { grid-template-columns: repeat(4, 1fr); } .stat.wide { grid-column: span 2; } }
+.stat b { font-family: var(--f-display); font-weight: 900; font-stretch: 70%; font-size: 40px; line-height: .95; color: var(--hc); font-variant-numeric: tabular-nums; }
+.stat p { margin: 0; font-size: 14px; }
+.stat a { font-size: 12px; color: var(--muted); text-decoration: underline; overflow-wrap: anywhere; }
+.stat a:hover { color: var(--ink); }
+.maptbl { overflow-x: auto; }
+.maptbl table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 520px; }
+.maptbl th { text-align: left; font-family: var(--f-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding: 6px 10px; border-bottom: 2px solid var(--rule); }
+.maptbl td { padding: 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.maptbl td:first-child { font-weight: 700; white-space: nowrap; }
+.caveat { font-size: 13px; color: var(--ink); background: color-mix(in srgb, var(--sun) 22%, var(--paper)); border-radius: 10px; padding: 12px 14px; margin: 0; }
+.legal { background: var(--paper); border: 2px solid var(--rule); border-radius: 14px; overflow: hidden; }
+.legal > summary { cursor: pointer; padding: 16px 20px; font-family: var(--f-display); font-weight: 800; font-stretch: 85%; font-size: 20px; color: var(--hero); list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+.legal > summary::after { content: "+"; font-size: 24px; line-height: 1; color: var(--pop); }
+.legal[open] > summary::after { content: "–"; }
+.legal-body { padding: 0 20px 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.legal-body section { min-width: 0; }
+.legal-body h3 { font-size: 18px; font-weight: 800; font-stretch: 90%; margin-bottom: 6px; color: var(--c-mgmt); }
+.legal-body ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 14px; max-width: 65ch; }
+.legal-body .note { grid-column: 1 / -1; }
+.agree { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; }
+.agree input { width: 20px; height: 20px; accent-color: var(--pop); margin-top: 1px; flex: none; }
+.linkish { background: none; border: 0; padding: 0; color: var(--pop); font-weight: 700; text-decoration: underline; cursor: pointer; }
+footer { background: var(--hero); color: #ffffffd9; border-radius: 14px; padding: 20px 22px; font-size: 14px; display: grid; gap: 10px; border-top: 4px solid var(--sun); }
+footer p { margin: 0; max-width: 95ch; }
+footer b { color: #fff; }
+footer .links { display: flex; flex-wrap: wrap; gap: 4px 0; }
+footer .links button { background: none; border: 0; padding: 0; color: var(--sun); text-decoration: underline; cursor: pointer; font: inherit; }
+footer .links span { padding: 0 6px; }
+footer .small { font-size: 13px; opacity: .85; }
+.gate { position: fixed; inset: 0; z-index: 50; background: color-mix(in srgb, var(--bg) 70%, transparent); backdrop-filter: blur(6px); display: grid; place-items: start center; overflow-y: auto; padding: calc(24px + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) calc(24px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+.gate-card { width: 100%; max-width: 560px; background: var(--paper); border: 2px solid var(--c-balance); border-radius: 14px; overflow: hidden; box-shadow: 0 20px 50px color-mix(in srgb, var(--hero) 30%, transparent); }
+.gate-brand { background: var(--hero); color: #fff; padding: 12px 18px; font-family: var(--f-display); font-weight: 800; font-size: 17px; border-bottom: 3px solid var(--sun); }
+.gate-head { background: var(--c-balance); color: #fff; padding: 16px 18px; }
+.gate-head h2 { font-size: 24px; font-weight: 800; }
+.gate-body { padding: 16px 18px 18px; display: grid; gap: 14px; }
+.gate-body p { margin: 0; font-size: 14px; }
+.gate-list { border: 1.5px solid var(--c-balance); border-radius: 8px; max-height: 260px; overflow-y: auto; padding: 12px 14px 12px 30px; margin: 0; display: grid; gap: 8px; font-size: 13.5px; }
+.gate-list li::marker { color: var(--c-balance); }
+.gate-list b { color: var(--c-balance); }
+.gate-links { display: flex; flex-wrap: wrap; gap: 8px; }
+.gate-links button { border: 1.5px solid var(--c-balance); color: var(--c-balance); background: var(--paper); border-radius: 6px; padding: 5px 10px; font-size: 12px; font-weight: 700; cursor: pointer; }
+.gate-accept { display: flex; gap: 10px; align-items: center; background: color-mix(in srgb, var(--sun) 20%, var(--paper)); border: 1.5px solid var(--sun); border-radius: 8px; padding: 12px 14px; font-size: 14px; font-weight: 600; }
+.gate-accept input { width: 20px; height: 20px; accent-color: var(--c-balance); flex: none; }
+.gate-actions { display: flex; justify-content: flex-end; gap: 10px; flex-wrap: wrap; }
+.gate-actions .btn { box-shadow: none; border-radius: 8px; }
+#gateAccept { background: var(--c-balance); }
+#gateDecline { background: var(--paper); color: var(--c-balance); border: 1.5px solid var(--c-balance); }
+.legal-body section { scroll-margin-top: 16px; }
+.danger-zone { display: grid; gap: 8px; padding: 14px; border: 2px solid var(--s1); border-radius: 10px; background: var(--s1-bg); }
+.feedback { display: grid; gap: 10px; }
+.feedback textarea { padding: 11px 13px; border: 2px solid var(--rule); background: var(--bg); border-radius: 10px; width: 100%; min-height: 90px; resize: vertical; }
+@media (prefers-reduced-motion: no-preference) {
+  .card { transition: border-color .15s, transform .15s; } .card:hover { transform: translateY(-3px) rotate(-.3deg); }
+  .punch span { transition: transform .12s, background .12s; }
+}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="hero-in">
+    <div class="mast">
+      <h1><span class="a">The Break</span><br><span class="b">Room</span></h1>
+      <div class="scale" aria-label="Rating scale">
+        <span class="chip" data-s="1">1 · Get out</span>
+        <span class="chip" data-s="2">2 · Bad</span>
+        <span class="chip" data-s="3">3 · It's a job</span>
+        <span class="chip" data-s="4">4 · Good</span>
+        <span class="chip" data-s="5">5 · Great</span>
+      </div>
+    </div>
+    <p class="tag">Customers have rated companies forever. Now it's the employees' turn. Rate your employer 1 to 5: the good, the bad and the worst. <b>No sponsored badges. No paid awards. Just the people who clock in.</b> Treat people well and they'll say so. If you don't, now you'll hear about it.</p>
+    </div>
+    <div class="spectrum" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+  </header>
+
+  <div class="bar" id="bar">
+    <input id="q" class="search" type="search" placeholder="Search employers" aria-label="Search employers" autocomplete="off">
+    <select id="sort" class="sort" aria-label="Sort">
+      <option value="count">Most rated</option>
+      <option value="high">Highest rated</option>
+      <option value="low">Lowest rated</option>
+      <option value="recent">Recently rated</option>
+    </select>
+    <button class="btn sun" id="rateBtn" type="button">Rate your employer</button>
+  </div>
+  <p class="note" id="status">Loading ratings…</p>
+
+  <section id="formPanel" class="panel" hidden aria-labelledby="formTitle">
+    <div class="panel-head">
+      <h2 id="formTitle">Rate your employer</h2>
+      <button class="btn ghost" type="button" id="cancelForm">Cancel</button>
+    </div>
+    <form id="form" novalidate>
+      <div class="fields">
+        <div class="field">
+          <label class="label" for="f-company">Employer</label>
+          <input id="f-company" list="companyList" maxlength="80" required placeholder="Company name" autocomplete="off">
+          <datalist id="companyList"></datalist>
+        </div>
+        <div class="field">
+          <label class="label" for="f-role">Your role (optional)</label>
+          <input id="f-role" maxlength="60" placeholder="e.g. Warehouse associate">
+        </div>
+      </div>
+
+      <div class="div-box">
+        <div class="fields">
+          <div class="field">
+            <label class="label" for="f-division">Division, team or location (optional)</label>
+            <input id="f-division" list="divisionList" maxlength="60" placeholder="e.g. Customer Service, Dallas warehouse, Corporate HQ" autocomplete="off">
+            <datalist id="divisionList"></datalist>
+          </div>
+          <div class="field">
+            <span class="label" id="flagLbl">Flag this group: compared with the rest of the company, it is…</span>
+            <div class="seg" role="radiogroup" aria-labelledby="flagLbl">
+              <label><input type="radio" name="flag" id="fl-better" value="better"><span>Better</span></label>
+              <label><input type="radio" name="flag" id="fl-same" value="same" checked><span>About the same</span></label>
+              <label><input type="radio" name="flag" id="fl-worse" value="worse"><span>Worse</span></label>
+            </div>
+          </div>
+        </div>
+        <p class="note" style="margin:0">Groups are shown only once 5 people from that group have rated, so a small team can't tell who wrote what.</p>
+      </div>
+
+      <div class="fields">
+        <div class="field">
+          <span class="label" id="statusLbl">Do you work there right now?</span>
+          <div class="seg" role="radiogroup" aria-labelledby="statusLbl">
+            <label><input type="radio" name="status" id="st-cur" value="current" checked><span>Yes, I work there now</span></label>
+            <label><input type="radio" name="status" id="st-for" value="former"><span>No, I used to</span></label>
+          </div>
+        </div>
+        <div class="field">
+          <span class="label" id="tenureLbl">How long have you worked there?</span>
+          <div class="seg" role="radiogroup" aria-labelledby="tenureLbl" id="tenureSeg"></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <span class="label" id="overallLbl">Overall rating</span>
+        <div class="punch" id="overall" role="radiogroup" aria-labelledby="overallLbl"></div>
+        <div class="meaning" id="overallMeaning" aria-live="polite">Pick the score that fits. Each one has a meaning, shown here.</div>
+      </div>
+
+      <div class="field">
+        <span class="label">Break it down</span>
+        <div class="mini" id="cats"></div>
+      </div>
+
+      <div class="fields">
+        <div class="field">
+          <label class="label" for="f-pros">The good</label>
+          <textarea id="f-pros" maxlength="1500" placeholder="What actually works there?"></textarea>
+        </div>
+        <div class="field">
+          <label class="label" for="f-cons">The bad</label>
+          <textarea id="f-cons" maxlength="1500" placeholder="What they won't put in the job ad"></textarea>
+        </div>
+      </div>
+
+      <div class="field">
+        <span class="label" id="awardLbl">Award check: if this employer won "Best Employer of the Year", would you agree?</span>
+        <div class="seg" role="radiogroup" aria-labelledby="awardLbl">
+          <label><input type="radio" name="award" id="aw-yes" value="yes"><span>Yes, they earned it</span></label>
+          <label><input type="radio" name="award" id="aw-no" value="no"><span>What the…? No.</span></label>
+          <label><input type="radio" name="award" id="aw-uns" value="unsure" checked><span>Not sure</span></label>
+        </div>
+      </div>
+
+      <p class="rules">Rate the company, not a person. Leave out names of coworkers or managers, phone numbers, and anything that could identify you or someone else. Your name is never shown. You get one rating per employer, and you can edit or delete it later.</p>
+      <label class="agree" for="f-agree"><input type="checkbox" id="f-agree"> <span>I'm a current or former employee of this company, this is my own honest experience, and I agree to the <button type="button" class="linkish" id="openLegal">Terms and Privacy notice</button>.</span></label>
+      <p class="err" id="formErr" hidden></p>
+      <div class="bar">
+        <button class="btn" type="submit" id="submitBtn">Post rating</button>
+        <button class="btn danger" type="button" id="deleteMine" hidden>Delete my rating</button>
+      </div>
+    </form>
+  </section>
+
+  <section id="detail" class="panel" hidden aria-live="polite"></section>
+
+  <section id="list" class="grid" aria-label="Employers"></section>
+
+  <section class="legend" id="legend" aria-labelledby="legendTitle">
+    <h2 id="legendTitle">What each score means</h2>
+    <div class="legend-grid" id="legendGrid"></div>
+  </section>
+
+  <section class="health" id="health" aria-labelledby="healthTitle">
+    <div class="health-head">
+      <span class="label" style="color:#fff;opacity:.85">The research</span>
+      <h2 id="healthTitle">What a bad employer costs your health</h2>
+      <p>A low score here isn't just a bad mood. Decades of research link toxic workplaces, long hours, harsh management and job insecurity to stress, heart disease and shorter lives.</p>
+    </div>
+    <div class="health-body">
+      <div class="stats">
+        <div class="stat" style="--hc: var(--s1)"><b>52% vs 15%</b><p>Workers in toxic workplaces were more than 3 times as likely to say work had harmed their mental health as workers in healthy ones.</p><a href="https://www.apa.org/news/press/releases/2023/07/work-mental-health-challenges" target="_blank" rel="noopener">APA, Work in America Survey, 2023</a></div>
+        <div class="stat" style="--hc: var(--s2)"><b>40%</b><p>of employees worldwide felt a lot of stress during the previous day.</p><a href="https://www.gallup.com/workplace/697904/state-of-the-global-workplace-2026.aspx" target="_blank" rel="noopener">Gallup, State of the Global Workplace, 2025 and 2026</a></div>
+        <div class="stat" style="--hc: var(--c-culture)"><b>2.2×</b><p>the risk of dying from heart disease for employees with high job strain (high demands, little control), followed for 25 years.</p><a href="https://pubmed.ncbi.nlm.nih.gov/12386034/" target="_blank" rel="noopener">Kivimäki et al., BMJ, 2002</a></div>
+        <div class="stat" style="--hc: var(--c-balance)"><b>~120,000</b><p>deaths a year in the US associated with harmful workplace conditions, and 5–8% of national health spending.</p><a href="https://econpapers.repec.org/RePEc:inm:ormnsc:v:62:y:2016:i:2:p:608-628" target="_blank" rel="noopener">Goh, Pfeffer &amp; Zenios, Management Science, 2016</a></div>
+        <div class="stat wide" style="--hc: var(--c-pay)"><b>Up to 2.8 years</b><p>of life expectancy lost to job conditions for workers with the least education (0.3–1 year for the most educated). Job conditions explain 10–38% of life-expectancy gaps between groups.</p><a href="https://www.gsb.stanford.edu/faculty-research/publications/exposure-harmful-workplace-practices-could-account-inequality-life" target="_blank" rel="noopener">Goh, Pfeffer &amp; Zenios, Health Affairs, 2015</a></div>
+        <div class="stat" style="--hc: var(--c-growth)"><b>1–1.5 years</b><p>of life expectancy lost by a worker laid off at age 40. Death rates were 50–100% higher in the year after the layoff.</p><a href="https://www.nber.org/papers/w13626" target="_blank" rel="noopener">Sullivan &amp; von Wachter, Quarterly Journal of Economics, 2009</a></div>
+        <div class="stat" style="--hc: var(--c-mgmt)"><b>745,000</b><p>deaths from stroke and heart disease in one year (2016) linked to working 55+ hours a week: a 35% higher stroke risk and 17% higher risk of dying from heart disease.</p><a href="https://www.paho.org/en/news/17-5-2021-long-working-hours-increasing-deaths-heart-disease-and-stroke-who-ilo" target="_blank" rel="noopener">WHO and ILO, 2021</a></div>
+      </div>
+
+      <div class="maptbl">
+        <table>
+          <caption class="label" style="text-align:left;padding-bottom:6px">How your ratings connect to the research</caption>
+          <thead><tr><th>Low score in</th><th>What it usually means</th><th>Linked health risk</th></tr></thead>
+          <tbody>
+            <tr><td><span class="dot" style="background:var(--c-mgmt)"></span>Management</td><td>High pressure, little say over your own work</td><td>Job strain: 2.2× heart-disease death risk</td></tr>
+            <tr><td><span class="dot" style="background:var(--c-balance)"></span>Work-life balance</td><td>Long hours, work spilling into family life</td><td>55+ hour weeks: 35% higher stroke risk</td></tr>
+            <tr><td><span class="dot" style="background:var(--c-pay)"></span>Pay &amp; benefits</td><td>Low pay, no health insurance</td><td>Lack of insurance is one of the biggest contributors to years of life lost</td></tr>
+            <tr><td><span class="dot" style="background:var(--c-growth)"></span>Growth</td><td>No future, constant layoff fear</td><td>Layoffs and insecurity: up to 1–1.5 years of life expectancy lost</td></tr>
+            <tr><td><span class="dot" style="background:var(--c-culture)"></span>Culture &amp; respect</td><td>Toxic, disrespectful, harassment</td><td>3× more likely to report harm to mental health</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="caveat"><b>Read this right:</b> these studies measure large groups of workers, not any one company on this page, and most show strong links rather than proof of cause. They show why working conditions matter. They can't predict any one person's health. If work is affecting your health, talk to a doctor. In the US, you can call or text <b>988</b> any time for mental health crisis support.</p>
+    </div>
+  </section>
+
+  <details class="legal" id="legal">
+    <summary>Terms of use, Privacy and security, License</summary>
+    <div class="legal-body">
+      <section id="sec-terms" aria-labelledby="termsH">
+        <h3 id="termsH">Terms of use</h3>
+        <ul>
+          <li><b>Free to use.</b> The Break Room is free while it is being tested for feedback.</li>
+          <li><b>First-hand ratings only.</b> Only current or former employees may rate an employer, and only based on their own experience.</li>
+          <li><b>No paid or fake ratings.</b> No rewarded or pressured ratings. Employers and anyone acting for them may not rate their own company or a competitor.</li>
+          <li><b>Rate the company, not a person.</b> Do not post names of coworkers or managers, contact details, or anything that identifies someone.</li>
+          <li><b>Keep it lawful.</b> No threats, harassment, hate speech, statements you know are false, or confidential business information or trade secrets.</li>
+          <li><b>Opinions, not facts.</b> Ratings are the opinions of the people who wrote them. They are not verified or endorsed by the developer, and this app is not affiliated with any employer listed.</li>
+          <li><b>Your responsibility.</b> You are responsible for what you post. Any decision you make based on ratings here, such as taking or leaving a job, is yours.</li>
+          <li><b>Time at the company.</b> Each rating shows how long the person says they worked there and whether they still do, so readers can weigh experience. This is self-reported and not verified. Giving false information breaks these terms.</li>
+          <li><b>Divisions and groups.</b> You may name the division, team or location your rating is about and flag it as better or worse than the rest of the company. Name a group, never a person. A group's name and scores are shown only after 5 people from it have rated.</li>
+          <li><b>Minimum of 5 ratings.</b> An employer's scores, award check and comments are shown only after 5 people have rated it, so nobody can work out who wrote what.</li>
+          <li><b>Moderation.</b> One rating per employer per person. The developer may remove any rating that breaks these terms.</li>
+          <li><b>Provided as is.</b> The app is provided "as is" and "as available", without warranties of any kind. To the extent the law allows, the developer is not liable for any direct or indirect loss arising from its use, including loss of data.</li>
+          <li><b>Changes.</b> These terms may change as the app develops. Continuing to use the app means you accept the current version.</li>
+        </ul>
+      </section>
+      <section id="sec-privacy" aria-labelledby="privH">
+        <h3 id="privH">Privacy and security</h3>
+        <ul>
+          <li><b>What is stored.</b> Your scores, comments, the role, division and employment status you enter, the date, and an anonymous account ID. Feedback you send is stored the same way.</li>
+          <li><b>Why the ID.</b> It links a rating to your account so you can edit or delete it, and so each person rates an employer only once.</li>
+          <li><b>What is never stored.</b> This app never saves or shows your name, email address or photo.</li>
+          <li><b>Who sees what.</b> Everyone with access sees ratings and comments, with no names, and only for employers with at least 5 ratings. This is a display rule in the app, not encryption. The developer can see the anonymous ID but not your name. Your feedback goes only to the developer.</li>
+          <li><b>Where it lives.</b> Data is stored by the Claude artifact service that hosts this app, so Anthropic's privacy policy also applies. Access is limited by sharing permissions and per-person write rules.</li>
+          <li><b>In this browser.</b> The only thing saved on your device is that you accepted these terms.</li>
+          <li><b>No tracking.</b> No ads, no tracking cookies, no analytics. Your data is never sold.</li>
+          <li><b>Your control.</b> Use "Delete all my data" at the bottom of the page to erase your ratings and feedback. Deleting is permanent.</li>
+        </ul>
+      </section>
+      <section id="sec-license" aria-labelledby="licH">
+        <h3 id="licH">License and copyright</h3>
+        <ul>
+          <li><b>Copyright.</b> © 2026 Karen Tinoco. The Break Room's name, design and code belong to the author.</li>
+          <li><b>License.</b> Licensed under PolyForm Noncommercial 1.0.0: free to view, run, and adapt for non-commercial use. Commercial use by permission only. Full text: <a href="https://polyformproject.org/licenses/noncommercial/1.0.0/" target="_blank" rel="noopener" style="color: var(--c-mgmt)">polyformproject.org/licenses/noncommercial/1.0.0</a></li>
+          <li><b>Your words stay yours.</b> You keep ownership of the ratings and comments you write. By posting, you allow them to be shown in this app.</li>
+          <li><b>Trademarks.</b> Company names belong to their owners and are used only to identify the employer being rated.</li>
+        </ul>
+      </section>
+      <section id="sec-feedback" class="feedback" aria-labelledby="fbH">
+        <h3 id="fbH">Send feedback</h3>
+        <label class="label" for="fb-text">Your feedback goes only to the developer and is used to plan future versions.</label>
+        <textarea id="fb-text" maxlength="2000" placeholder="What works, what doesn't, what you'd add"></textarea>
+        <div class="bar"><button class="btn" type="button" id="fbSend">Send feedback</button><span class="note" id="fbNote"></span></div>
+      </section>
+      <section id="sec-delete" class="danger-zone" aria-labelledby="delH">
+        <h3 id="delH" style="color: var(--s1)">Delete all my data</h3>
+        <p class="note" style="color: var(--ink); margin: 0">Erases every rating and all feedback you've posted, and your acceptance of the terms on this device. This can't be undone.</p>
+        <div class="bar"><button class="btn danger" type="button" id="delAll">Delete all my data</button><span class="note" id="delNote"></span></div>
+      </section>
+      <p class="note">Effective November 3, 2026.</p>
+    </div>
+  </details>
+
+  <footer>
+    <p><b>The Break Room</b> by Karen Tinoco · © 2026 Karen Tinoco. Licensed under PolyForm Noncommercial 1.0.0: free to view, run, and adapt for non-commercial use. Commercial use by permission only.</p>
+    <p class="links"><button type="button" data-open="sec-license">License</button><span>·</span><button type="button" data-open="sec-privacy">Privacy and security</button><span>·</span><button type="button" data-open="sec-terms">Terms of use</button><span>·</span><button type="button" data-open="sec-feedback">Send feedback</button><span>·</span><button type="button" data-open="sec-delete">Delete all my data</button></p>
+    <p class="small">Designed and directed by the author; implemented with Claude Code as an AI pair programmer. Ratings are the opinions of individual employees. Not affiliated with or endorsed by any employer named here. One rating per person per employer, so no company can flood its own page.</p>
+  </footer>
+</div>
+<div class="toast" id="toast" hidden role="status"></div>
+<div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gateTitle" hidden>
+  <div class="gate-card">
+    <div class="gate-brand">The Break Room</div>
+    <div class="gate-head"><h2 id="gateTitle">Before you start: Terms of use</h2></div>
+    <div class="gate-body" id="gateMain">
+      <p>Please read this summary of the Terms of use. You need to accept them before you can use the app.</p>
+      <ul class="gate-list">
+        <li><b>Free while testing.</b> The Break Room is free to use while it's being tested for feedback. Your feedback goes only to the app's developer and is used to plan future versions.</li>
+        <li><b>Honest, first-hand ratings.</b> Only rate an employer you work or worked for, based on your own experience. No paid, rewarded or fake ratings.</li>
+        <li><b>Safety in numbers.</b> An employer's scores and comments appear only after 5 people have rated it.</li>
+        <li><b>Rate the company, not people.</b> Don't name coworkers or managers or post anything that identifies someone.</li>
+        <li><b>Opinions, not facts.</b> Ratings are the views of the people who wrote them. They are not verified, and the app is not affiliated with any employer listed.</li>
+        <li><b>Your data.</b> Ratings are stored by the service that hosts this app with an anonymous account ID. Your name, email and photo are never stored or shown.</li>
+        <li><b>Deleting is permanent.</b> You can delete your ratings and feedback at any time. Deleted data cannot be recovered.</li>
+        <li><b>Provided as is.</b> The app is provided "as is" and "as available", without warranties of any kind. To the extent the law allows, its developer is not liable for any direct or indirect loss arising from its use.</li>
+        <li><b>Copyright.</b> © 2026 Karen Tinoco. Licensed under PolyForm Noncommercial 1.0.0. Commercial use by permission only.</li>
+      </ul>
+      <div class="gate-links"><button type="button" data-open="sec-terms">Read the full Terms of use</button><button type="button" data-open="sec-privacy">Privacy &amp; security</button><button type="button" data-open="sec-license">License</button></div>
+      <label class="gate-accept" for="gateCheck"><input type="checkbox" id="gateCheck"> I have read and accept the Terms of use and the Privacy &amp; security notice</label>
+      <div class="gate-actions"><button class="btn" type="button" id="gateDecline">Decline</button><button class="btn" type="button" id="gateAccept" disabled>Accept and continue</button></div>
+    </div>
+    <div class="gate-body" id="gateDeclined" hidden>
+      <p>You need to accept the Terms of use and the Privacy &amp; security notice to use The Break Room. Nothing has been saved.</p>
+      <div class="gate-actions"><button class="btn" type="button" id="gateBack">Review the terms again</button></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const LABELS = ["", "Get out", "Bad", "It's a job", "Good", "Great"];
+  const TENURE = [["lt1", "Less than 1 year"], ["1-2", "1–2 years"], ["3-5", "3–5 years"], ["6-10", "6–10 years"], ["10plus", "More than 10 years"]];
+  const tenureLevel = (v) => TENURE.findIndex((t) => t[0] === v) + 1; // 1..5, 0 = unknown
+  const credBadge = (lvl, text) => {
+    const b = el("span", "cred"); b.style.setProperty("--lvl", lvl);
+    const m = el("span", "meter"); m.setAttribute("aria-hidden", "true");
+    for (let i = 1; i <= 5; i++) m.append(el("i", i <= lvl ? "on" : ""));
+    b.append(m, document.createTextNode(text)); return b;
+  };
+  const tenureLabel = (v) => (TENURE.find((t) => t[0] === v) || [])[1] || "";
+  const MIN_RATINGS = 5; // a company's scores and comments stay hidden until this many people rate it
+  const MEANING = ["",
+    "Toxic, unsafe or disrespectful. People are looking for the exit and would warn a friend to stay away.",
+    "More bad days than good. Real problems with pay, management or respect that nobody is fixing.",
+    "Pays the bills. Nothing terrible, nothing special. You'd leave for a better offer.",
+    "Treats people fairly and mostly manages well. A few complaints, but you'd recommend it.",
+    "The real deal: fair pay, respect and room to grow. You'd tell a friend to apply today."];
+  const lvl = (node, i) => { node.style.setProperty("--lc", `var(--s${i})`); node.style.setProperty("--lb", `var(--s${i}-bg)`); return node; };
+  const CATS = [["pay", "Pay & benefits"], ["mgmt", "Management"], ["balance", "Work-life balance"], ["culture", "Culture & respect"], ["growth", "Growth"]];
+  const dot = (k) => { const d = el("span", "dot"); d.style.background = `var(--c-${k})`; return d; };
+  const scoreTint = (v) => v == null ? "var(--paper)" : `var(--s${Math.min(5, Math.max(1, Math.round(v)))}-bg)`;
+  const $ = (id) => document.getElementById(id);
+  const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
+  const scoreColor = (v) => v == null ? "var(--rule)" : `var(--s${Math.min(5, Math.max(1, Math.round(v)))})`;
+  const keyOf = (name) => name.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+
+  let db = null, me = null, isOwner = false, canWrite = true;
+  let docs = []; // [{uid, entries}]
+  let companies = []; // aggregated
+  let openKey = null, editingKey = null;
+
+  // build punch pickers
+  function punch(container, name, sizeLabels) {
+    for (let i = 1; i <= 5; i++) {
+      const l = el("label"); l.style.setProperty("--pc", `var(--s${i})`); l.style.setProperty("--pcb", `var(--s${i}-bg)`);
+      const inp = el("input"); inp.type = "radio"; inp.name = name; inp.value = i; inp.id = `${name}-${i}`;
+      const s = el("span"); s.append(el("b", null, String(i)));
+      if (sizeLabels) s.append(el("i", null, LABELS[i]));
+      inp.setAttribute("aria-label", `${i}, ${LABELS[i]}`);
+      l.append(inp, s); container.append(l);
+    }
+  }
+  punch($("overall"), "overall", true);
+  CATS.forEach(([k, label]) => {
+    const r = el("div", "mini-row"); const lab = el("span"); lab.append(dot(k), document.createTextNode(label)); lab.id = "cat-" + k;
+    const p = el("div", "punch"); p.setAttribute("role", "radiogroup"); p.setAttribute("aria-labelledby", lab.id);
+    punch(p, "c_" + k, false); r.append(lab, p); $("cats").append(r);
+  });
+
+  for (let i = 5; i >= 1; i--) { const d = lvl(el("div", "lv"), i); d.append(el("b", null, `${i} · ${LABELS[i]}`), el("span", null, MEANING[i])); $("legendGrid").append(d); }
+  TENURE.forEach(([v, label]) => { const l = el("label"); const i = el("input"); i.type = "radio"; i.name = "tenure"; i.value = v; i.id = "ten-" + v; l.append(i, el("span", null, label)); $("tenureSeg").append(l); });
+  const syncTenureLabel = () => { $("tenureLbl").textContent = getRadio("status") === "former" ? "How long did you work there?" : "How long have you worked there?"; };
+  document.querySelectorAll('input[name="status"]').forEach((i) => i.addEventListener("change", syncTenureLabel));
+  function fillDivisionList() {
+    const c = companies.find((x) => x.key === keyOf($("f-company").value));
+    $("divisionList").replaceChildren(...(c ? c.divisions.filter((d) => d.shown).map((d) => { const o = el("option"); o.value = d.name; return o; }) : []));
+  }
+  $("f-company").addEventListener("input", fillDivisionList);
+  function showMeaning() { const v = Number(getRadio("overall")); const m = $("overallMeaning"); if (v) { lvl(m, v); m.textContent = `${v} · ${LABELS[v]}: ${MEANING[v]}`; } else { m.style.removeProperty("--lc"); m.style.removeProperty("--lb"); m.textContent = "Pick the score that fits. Each one has a meaning, shown here."; } }
+  $("overall").addEventListener("change", showMeaning);
+  const TERMS_VERSION = "2026-11-03";
+  const store = { get(k) { try { return localStorage.getItem(k); } catch { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch {} }, del(k) { try { localStorage.removeItem(k); } catch {} } };
+  function openSection(id) {
+    $("legal").open = true;
+    const g = $("gate"); if (!g.hidden) { g.dataset.peek = "1"; g.hidden = true; }
+    $(id).scrollIntoView({ block: "start", behavior: "smooth" });
+    if (g.dataset.peek) showBackToGate();
+  }
+  function showBackToGate() {
+    if ($("backGate")) return;
+    const b = el("button", "btn", "Back to accept the terms"); b.id = "backGate"; b.type = "button";
+    Object.assign(b.style, { position: "fixed", right: "max(16px, env(safe-area-inset-right, 0px))", bottom: "calc(16px + env(safe-area-inset-bottom, 0px))", zIndex: 40 });
+    b.onclick = () => { b.remove(); delete $("gate").dataset.peek; $("gate").hidden = false; $("gateCheck").focus(); };
+    document.body.append(b);
+  }
+  document.addEventListener("click", (e) => { const t = e.target.closest("[data-open]"); if (t) openSection(t.dataset.open); });
+  $("openLegal").addEventListener("click", () => openSection("sec-terms"));
+  function showGate() { $("gateMain").hidden = false; $("gateDeclined").hidden = true; $("gateCheck").checked = false; $("gateAccept").disabled = true; $("gate").hidden = false; }
+  if (store.get("br-terms") !== TERMS_VERSION) showGate();
+  $("gateCheck").addEventListener("change", () => { $("gateAccept").disabled = !$("gateCheck").checked; });
+  $("gateAccept").addEventListener("click", () => { store.set("br-terms", TERMS_VERSION); $("gate").hidden = true; $("backGate")?.remove(); toast("Welcome to The Break Room"); });
+  $("gateDecline").addEventListener("click", () => { $("gateMain").hidden = true; $("gateDeclined").hidden = false; });
+  $("gateBack").addEventListener("click", showGate);
+
+  $("fbSend").addEventListener("click", async () => {
+    const txt = $("fb-text").value.trim(); const note = $("fbNote");
+    if (!txt) { note.textContent = "Write something first."; return; }
+    if (!db || !me) { note.textContent = "Sign in to claude.ai to send feedback."; return; }
+    $("fbSend").disabled = true;
+    try {
+      const ref = db.doc("feedback/" + me); const cur = await ref.get();
+      const items = (cur.exists && Array.isArray(cur.data().items) ? cur.data().items : []).slice(-49);
+      items.push({ text: txt, at: new Date().toISOString() });
+      await ref.set({ items });
+      $("fb-text").value = ""; note.textContent = "Sent. Thank you."; toast("Feedback sent");
+    } catch { note.textContent = "Your feedback didn't send. Try again."; }
+    finally { $("fbSend").disabled = false; }
+  });
+
+  let delArmed = false;
+  $("delAll").addEventListener("click", async () => {
+    const b = $("delAll"), note = $("delNote");
+    if (!delArmed) { delArmed = true; b.textContent = "Tap again to erase everything"; setTimeout(() => { delArmed = false; b.textContent = "Delete all my data"; }, 4000); return; }
+    delArmed = false; b.textContent = "Delete all my data";
+    if (!db || !me) { store.del("br-terms"); note.textContent = "Nothing stored for you here besides your acceptance, which is now cleared."; return; }
+    b.disabled = true;
+    try {
+      await db.doc("reviews/" + me).delete(); await db.doc("feedback/" + me).delete();
+      store.del("br-terms"); docs = docs.filter((d) => d.uid !== me); aggregate(); renderList(); if (openKey) renderDetail();
+      note.textContent = "All your data is deleted."; toast("All your data is deleted"); setTimeout(showGate, 1500);
+    } catch { note.textContent = "Couldn't delete everything. Try again."; }
+    finally { b.disabled = false; }
+  });
+
+  function toast(msg) { const t = $("toast"); t.textContent = msg; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => t.hidden = true, 2600); }
+  const avg = (a) => a.length ? a.reduce((x, y) => x + y, 0) / a.length : null;
+
+  function aggregate() {
+    const map = new Map();
+    for (const d of docs) for (const [k, e] of Object.entries(d.entries || {})) {
+      if (!e || typeof e.overall !== "number" || e.overall < 1 || e.overall > 5) continue;
+      let c = map.get(k);
+      if (!c) { c = { key: k, name: String(e.company || k), reviews: [] }; map.set(k, c); }
+      c.reviews.push({ ...e, uid: d.uid });
+    }
+    companies = [...map.values()].map((c) => {
+      c.reviews.sort((a, b) => String(b.at).localeCompare(String(a.at)));
+      c.name = String(c.reviews[0].company || c.key);
+      c.avg = avg(c.reviews.map((r) => r.overall));
+      c.dist = [1, 2, 3, 4, 5].map((s) => c.reviews.filter((r) => r.overall === s).length);
+      c.cats = Object.fromEntries(CATS.map(([k]) => [k, avg(c.reviews.map((r) => r.cats?.[k]).filter((v) => typeof v === "number"))]));
+      const aw = c.reviews.filter((r) => r.award === "yes" || r.award === "no");
+      c.awardYes = aw.length ? aw.filter((r) => r.award === "yes").length / aw.length : null;
+      c.awardN = aw.length;
+      c.latest = c.reviews[0].at || "";
+      c.shown = c.reviews.length >= MIN_RATINGS;
+      const dm = new Map();
+      for (const r of c.reviews) {
+        const dk = r.division ? keyOf(r.division) : ""; if (!dk) continue;
+        let d = dm.get(dk); if (!d) { d = { key: dk, name: r.division, reviews: [] }; dm.set(dk, d); }
+        d.reviews.push(r);
+      }
+      c.divisions = [...dm.values()].map((d) => {
+        d.avg = avg(d.reviews.map((r) => r.overall));
+        d.better = d.reviews.filter((r) => r.flag === "better").length;
+        d.worse = d.reviews.filter((r) => r.flag === "worse").length;
+        d.shown = d.reviews.length >= MIN_RATINGS;
+        return d;
+      }).sort((a, b) => b.shown - a.shown || b.worse - a.worse || b.reviews.length - a.reviews.length);
+      c.divShown = new Set(c.divisions.filter((d) => d.shown).map((d) => d.key));
+      return c;
+    });
+  }
+
+  function verdictText(c) {
+    if (c.awardYes == null) return "No award check answers yet";
+    const p = Math.round(c.awardYes * 100);
+    return `${p}% would back a "Best Employer" award`;
+  }
+
+  function distBar(c) {
+    const d = el("div", "dist"); const n = c.reviews.length;
+    c.dist.forEach((v, i) => { if (!v) return; const s = el("span"); s.style.width = (v / n * 100) + "%"; s.style.background = `var(--s${i + 1})`; s.title = `${v} × ${i + 1}`; d.append(s); });
+    return d;
+  }
+
+  function expStats(c) {
+    const known = c.reviews.filter((r) => tenureLevel(r.tenure) > 0);
+    const seasoned = known.filter((r) => tenureLevel(r.tenure) >= 3).length;
+    const lvl = known.length ? Math.round(known.reduce((a, r) => a + tenureLevel(r.tenure), 0) / known.length) : 0;
+    return { known: known.length, seasoned, lvl };
+  }
+  function expLine(c) {
+    const st = expStats(c); const d = el("div", "exp");
+    if (!st.known) { d.append(el("span", "note", "No experience info yet")); return d; }
+    d.append(credBadge(st.lvl, `${st.seasoned} of ${st.known} with 3+ years`));
+    return d;
+  }
+  function renderList() {
+    const list = $("list"); list.replaceChildren();
+    const q = keyOf($("q").value);
+    let items = companies.filter((c) => !q || c.key.includes(q));
+    const s = $("sort").value;
+    items.sort((a, b) => s === "high" ? b.avg - a.avg || b.reviews.length - a.reviews.length
+      : s === "low" ? a.avg - b.avg || b.reviews.length - a.reviews.length
+      : s === "recent" ? String(b.latest).localeCompare(String(a.latest))
+      : b.reviews.length - a.reviews.length || b.avg - a.avg);
+
+    const dl = $("companyList"); dl.replaceChildren(...companies.map((c) => { const o = el("option"); o.value = c.name; return o; }));
+
+    if (!companies.length) {
+      const e = el("div", "empty"); e.style.gridColumn = "1 / -1";
+      e.append(el("h2", null, "No employers rated yet. Be the first."));
+      const ul = el("ul", "steps");
+      [["Pick your employer", "Current or former. Any company, any size."], ["Punch in a score", "1 to 5 overall, plus pay, management, balance, culture and growth."], ["Say it straight", "The good, the bad, and whether that shiny award is deserved."]]
+        .forEach(([t, d]) => { const li = el("li"); li.append(el("b", null, t), el("span", "note", d)); ul.append(li); });
+      e.append(ul);
+      const es = el("div", "empty-scale");
+      for (let i = 1; i <= 5; i++) { const b = el("div"); b.style.background = `var(--s${i})`; b.append(el("b", null, String(i)), document.createTextNode(LABELS[i])); es.append(b); }
+      e.append(es);
+      if (canWrite && db) { const b = el("button", "btn", "Rate your employer"); b.type = "button"; b.style.justifySelf = "start"; b.onclick = openForm; e.append(b); }
+      list.append(e); return;
+    }
+    if (!items.length) { const e = el("p", "note", `No employer matches "${$("q").value}". Rate it and it will show up here.`); e.style.gridColumn = "1 / -1"; list.append(e); return; }
+
+    const pips = (n) => { const d = el("div", "pips"); d.style.setProperty("--min", MIN_RATINGS); for (let i = 0; i < MIN_RATINGS; i++) d.append(el("span", i < n ? "on" : "")); d.setAttribute("aria-hidden", "true"); return d; };
+    const shown = items.filter((c) => c.shown), waiting = items.filter((c) => !c.shown).sort((a, b) => b.reviews.length - a.reviews.length || String(b.latest).localeCompare(String(a.latest)));
+    if (!shown.length) { const t = el("div", "group-title"); t.append(el("h2", null, "No employer has enough ratings yet"), el("span", "note", `Scores and comments appear once ${MIN_RATINGS} people have rated an employer, so nobody can work out who wrote what.`)); list.append(t); }
+    for (const c of shown) {
+      const card = el("button", "card"); card.type = "button"; card.style.setProperty("--sc", scoreColor(c.avg)); card.style.setProperty("--scb", scoreTint(c.avg));
+      card.setAttribute("aria-label", `${c.name}, ${c.avg.toFixed(1)} out of 5 from ${c.reviews.length} ratings`);
+      const sc = el("div", "score", c.avg.toFixed(1)); sc.append(el("small", null, "out of 5"));
+      const n = c.reviews.length;
+      card.append(el("h3", null, c.name), sc, el("div", "meta", `${n} rating${n === 1 ? "" : "s"} · ${LABELS[Math.round(c.avg)]}`), distBar(c), expLine(c), el("div", "verdict", verdictText(c)));
+      const fl = c.divisions.filter((d) => d.shown && d.worse > d.reviews.length / 2);
+      if (fl.length) card.append(el("div", "flagline", `⚑ Flagged as worse than the rest: ${fl.map((d) => d.name).join(", ")}`));
+      card.onclick = () => openDetail(c.key);
+      list.append(card);
+    }
+    if (waiting.length) {
+      const t = el("div", "group-title");
+      t.append(el("h2", null, "Waiting for more ratings"), el("span", "note", `Scores and comments unlock at ${MIN_RATINGS} ratings. This protects the people who rate, especially at small companies. Know someone who works at one of these? Send them here.`));
+      list.append(t);
+      for (const c of waiting) {
+        const n = c.reviews.length, left = MIN_RATINGS - n;
+        const card = el("button", "card pending"); card.type = "button";
+        card.setAttribute("aria-label", `${c.name}, ${n} of ${MIN_RATINGS} ratings needed before scores are shown`);
+        card.append(el("h3", null, c.name), el("span", "lock-badge", `${n} of ${MIN_RATINGS}`), el("div", "meta", `${left} more rating${left === 1 ? "" : "s"} to unlock`), pips(n),
+          el("div", "lock", me && c.reviews.some((r) => r.uid === me) ? "Your rating is in. It shows when the scores unlock." : "Scores and comments are hidden until then."));
+        card.onclick = () => openDetail(c.key);
+        list.append(card);
+      }
+    }
+  }
+
+  function renderDetail() {
+    const p = $("detail");
+    const c = companies.find((x) => x.key === openKey);
+    if (!c) { p.hidden = true; return; }
+    p.replaceChildren(); p.hidden = false; p.style.setProperty("--sc", scoreColor(c.avg));
+    const head = el("div", "panel-head");
+    const ht = el("div"); ht.append(el("span", "label", "Employer"), el("h2", null, c.name));
+    const acts = el("div", "bar");
+    const mine = me && c.reviews.find((r) => r.uid === me);
+    if (canWrite && db) { const rb = el("button", "btn", mine ? "Edit my rating" : "Rate this employer"); rb.type = "button"; rb.onclick = () => openForm(c.key); acts.append(rb); }
+    const back = el("button", "btn ghost", "Back to all"); back.type = "button"; back.onclick = () => { openKey = null; renderDetail(); $("list").hidden = false; };
+    acts.append(back); head.append(ht, acts);
+
+    if (!c.shown && !isOwner) {
+      p.style.setProperty("--sc", "var(--c-balance)");
+      const n = c.reviews.length, left = MIN_RATINGS - n;
+      const box = el("div", "pending-box");
+      const pp = el("div", "pips"); pp.style.setProperty("--min", MIN_RATINGS); for (let i = 0; i < MIN_RATINGS; i++) pp.append(el("span", i < n ? "on" : ""));
+      box.append(el("strong", null, `${n} of ${MIN_RATINGS} ratings`), pp,
+        el("p", "note", `${c.name}'s scores, award check and comments stay hidden until ${MIN_RATINGS} people have rated it. With only a few ratings, coworkers or managers could guess who wrote what. ${left} more to go.`));
+      if (mine) box.append(el("p", null, `Your rating (${mine.overall} · ${LABELS[mine.overall]}) is saved. You can edit or delete it any time.`));
+      p.append(head, box); return;
+    }
+    if (!c.shown && isOwner) p.append(el("div", "owner-banner", `Hidden from everyone else: ${c.reviews.length} of ${MIN_RATINGS} ratings so far. You can see it because you own this app, so you can moderate.`));
+
+    const sum = el("div", "summary");
+    const left = el("div", "bigbox"); const big = el("div", "big", c.avg.toFixed(1));
+    left.append(big, el("div", "word", LABELS[Math.round(c.avg)]), el("div", "meta", `out of 5 · ${c.reviews.length} rating${c.reviews.length === 1 ? "" : "s"}`));
+    const rows = el("div", "rows");
+    const mkRow = (label, v, max, text, color, vcolor, dk) => { const r = el("div", "row"); const t = el("div", "track"); const f = el("div", "fill"); f.style.width = (v / max * 100) + "%"; f.style.background = color; t.append(f); const lab = el("span"); if (dk) lab.append(dot(dk)); lab.append(document.createTextNode(label)); const vv = el("span", "v", text); if (vcolor) vv.style.color = vcolor; r.append(lab, t, vv); return r; };
+    rows.append(el("span", "label", "How people scored it"));
+    for (let s = 5; s >= 1; s--) rows.append(mkRow(`${s} · ${LABELS[s]}`, c.dist[s - 1], c.reviews.length, String(c.dist[s - 1]), `var(--s${s})`));
+    const cr = el("div", "rows"); cr.append(el("span", "label", "Breakdown"));
+    CATS.forEach(([k, label]) => { const v = c.cats[k]; cr.append(mkRow(label, v || 0, 5, v == null ? "–" : v.toFixed(1), `var(--c-${k})`, v == null ? null : scoreColor(v), k)); });
+    rows.append(el("div"), cr);
+    sum.append(left, rows);
+
+    const divs = el("div", "divs");
+    divs.append(el("span", "label", "By division, team or location"));
+    if (!c.divisions.length) divs.append(el("p", "note", "Nobody has named a division yet. Add yours when you rate."));
+    for (const d of c.divisions) {
+      const row = el("div", "div-row" + (d.shown || isOwner ? "" : " locked"));
+      if (d.shown || isOwner) {
+        row.style.setProperty("--sc", scoreColor(d.avg)); row.style.setProperty("--scb", scoreTint(d.avg));
+        const n = d.reviews.length;
+        row.append(el("h4", null, d.name), el("div", "dscore", d.avg.toFixed(1)));
+        const fl = el("div", "flags");
+        fl.append(el("span", "meta", `${n} rating${n === 1 ? "" : "s"}${d.shown ? "" : " · hidden from others (you're the owner)"}`));
+        if (d.worse) { const f = el("span", "flag", `⚑ ${d.worse} flagged worse`); f.style.setProperty("--fc", "var(--s1)"); fl.append(f); }
+        if (d.better) { const f = el("span", "flag", `${d.better} flagged better`); f.style.setProperty("--fc", "var(--s5)"); fl.append(f); }
+        row.append(fl);
+      } else {
+        row.append(el("h4", null, "A smaller group"), el("span", "lock-badge", `${d.reviews.length} of ${MIN_RATINGS}`), el("span", "note", `Group names and scores show at ${MIN_RATINGS} ratings to protect people on small teams.`));
+      }
+      divs.append(row);
+    }
+    const who = el("div", "who");
+    const tiles = el("div", "who-tiles");
+    [["current", "Work there now", "var(--s5)"], ["former", "Used to work there", "var(--c-growth)"]].forEach(([k, label, col]) => {
+      const g = c.reviews.filter((r) => (r.status || "current") === k); const a = avg(g.map((r) => r.overall));
+      const t = el("div", "who-tile"); t.style.setProperty("--tc", col);
+      t.append(el("span", "label", label), el("b", null, String(g.length)), el("span", null, g.length ? `${g.length === 1 ? "person" : "people"} · average ${a.toFixed(1)}` : "nobody yet"));
+      tiles.append(t);
+    });
+    const tr = el("div", "rows"); tr.append(el("span", "label", "How long they've worked there"));
+    { const st = expStats(c); if (st.known) tr.append(el("p", null, `${Math.round(st.seasoned / st.known * 100)}% of the people rating ${c.name} have worked there 3 years or more.`)); }
+    TENURE.forEach(([v, label]) => {
+      const g = c.reviews.filter((r) => r.tenure === v); const a = avg(g.map((r) => r.overall));
+      tr.append(mkRow(label, g.length, c.reviews.length, a == null ? "–" : a.toFixed(1), "var(--c-mgmt)", a == null ? null : scoreColor(a)));
+    });
+    const tiw = el("div", "rows"); tiw.append(el("span", "label", "Who rated"), tiles);
+    who.append(tiw, tr);
+    const aw = el("div", "award");
+    aw.append(el("span", "label", "Award check"));
+    if (c.awardYes == null) aw.append(el("strong", null, "No answers yet"));
+    else {
+      const pct = Math.round(c.awardYes * 100);
+      const m = el("div", "award-meter"); const y = el("span", "y"); y.style.width = pct + "%"; const n2 = el("span", "n"); n2.style.width = (100 - pct) + "%"; m.append(y, n2);
+      aw.append(el("strong", null, `${pct}% of employees would back a "Best Employer" award.`), m,
+        el("span", "note", `${100 - pct}% said no. Based on ${c.awardN} answer${c.awardN === 1 ? "" : "s"}. Next time this company wins a trophy, you'll know what the staff thinks.`));
+    }
+
+    const rv = el("div", "levels");
+    rv.append(el("span", "label", "Score by score: what people say"), el("span", "selfrep", "Within each score, people who have worked there longest are listed first. Time at the company is self-reported."));
+    const mkReview = (r) => {
+      const box = el("article", "review"); box.style.setProperty("--rc", `var(--s${r.overall})`); box.style.setProperty("--rb", `var(--s${r.overall}-bg)`);
+      const top = el("div", "review-top");
+      const lv0 = tenureLevel(r.tenure);
+      if (lv0) top.append(credBadge(lv0, `${r.status === "former" ? "Worked there" : "Working there"} ${tenureLabel(r.tenure).toLowerCase()}`));
+      const sc0 = el("span", "status-chip", r.status === "former" ? "Former employee" : "Current employee"); sc0.style.setProperty("--stc", r.status === "former" ? "var(--c-growth)" : "var(--s5)"); top.append(sc0);
+      if (r.division && (c.divShown.has(keyOf(r.division)) || isOwner)) top.append(el("span", "div-chip", (r.flag === "worse" ? "⚑ " : "") + r.division + (r.flag === "worse" ? " · flagged worse" : r.flag === "better" ? " · flagged better" : "")));
+      top.append(el("span", "meta", [r.role, r.at ? new Date(r.at).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" }) : ""].filter(Boolean).join(" · ")));
+      if (me && r.uid === me) top.append(el("span", "chip mine", "Yours"));
+      if (isOwner && r.uid !== me) { const del = el("button", "btn danger", "Remove"); del.type = "button"; del.onclick = () => removeEntry(r.uid, c.key, del); top.append(del); }
+      box.append(top);
+      if (r.pros || r.cons) {
+        const pc = el("div", "pc");
+        const a = el("div", "good"); a.append(el("span", "label", "The good"), document.createTextNode(r.pros || "—"));
+        const b = el("div", "bad"); b.append(el("span", "label", "The bad"), document.createTextNode(r.cons || "—"));
+        pc.append(a, b); box.append(pc);
+      } else box.append(el("span", "note", "Left a score, no comments."));
+      return box;
+    };
+    const total = c.reviews.length;
+    for (let s = 5; s >= 1; s--) {
+      const group = c.reviews.filter((r) => r.overall === s);
+      const lv = lvl(el("section", "level" + (group.length ? "" : " none")), s);
+      const h = el("div", "level-head");
+      h.append(el("b", null, `${s} · ${LABELS[s]}`), el("span", "cnt", `${group.length} ${group.length === 1 ? "person" : "people"} · ${Math.round(group.length / total * 100)}%`));
+      lv.append(h, el("p", "level-def", MEANING[s]));
+      if (!group.length) lv.append(el("span", "note", `Nobody rated ${c.name} a ${s} yet.`));
+      group.sort((a, b) => tenureLevel(b.tenure) - tenureLevel(a.tenure) || String(b.at).localeCompare(String(a.at)));
+      group.forEach((r) => lv.append(mkReview(r)));
+      rv.append(lv);
+    }
+    p.append(head, sum, who, divs, aw, rv);
+  }
+
+  function openDetail(k) { openKey = k; $("formPanel").hidden = true; renderDetail(); $("list").hidden = true; $("detail").scrollIntoView({ block: "start", behavior: "smooth" }); }
+
+  function setRadio(name, v) { const i = document.querySelector(`input[name="${name}"][value="${v}"]`); if (i) i.checked = true; }
+  function clearRadio(name) { document.querySelectorAll(`input[name="${name}"]`).forEach((i) => i.checked = false); }
+  const getRadio = (name) => document.querySelector(`input[name="${name}"]:checked`)?.value;
+
+  function fillForm(k) {
+    const mineDoc = docs.find((d) => d.uid === me);
+    const e = k && mineDoc?.entries?.[k];
+    const c = k && companies.find((x) => x.key === k);
+    $("f-company").value = e?.company || c?.name || "";
+    $("f-role").value = e?.role || ""; $("f-division").value = e?.division || ""; setRadio("flag", e?.flag || "same"); fillDivisionList(); $("f-pros").value = e?.pros || ""; $("f-cons").value = e?.cons || "";
+    setRadio("status", e?.status || "current"); setRadio("award", e?.award || "unsure");
+    e?.tenure ? setRadio("tenure", e.tenure) : clearRadio("tenure"); syncTenureLabel();
+    e ? setRadio("overall", e.overall) : clearRadio("overall");
+    CATS.forEach(([ck]) => e?.cats?.[ck] ? setRadio("c_" + ck, e.cats[ck]) : clearRadio("c_" + ck));
+    editingKey = e ? k : null; showMeaning(); $("f-agree").checked = !!e;
+    $("formTitle").textContent = e ? "Edit your rating" : "Rate your employer";
+    $("submitBtn").textContent = e ? "Save changes" : "Post rating";
+    $("deleteMine").hidden = !e; $("formErr").hidden = true;
+  }
+
+  function openForm(k) {
+    if (!db) return;
+    fillForm(typeof k === "string" ? k : null);
+    $("formPanel").hidden = false; $("detail").hidden = true; $("list").hidden = true;
+    $("formPanel").scrollIntoView({ block: "start", behavior: "smooth" });
+    $("f-company").focus({ preventScroll: true });
+  }
+  function closeForm() { $("formPanel").hidden = true; $("list").hidden = false; if (openKey) { renderDetail(); $("list").hidden = true; } }
+
+  $("f-company").addEventListener("change", () => {
+    const k = keyOf($("f-company").value); const mineDoc = docs.find((d) => d.uid === me);
+    if (mineDoc?.entries?.[k] && editingKey !== k) { const name = $("f-company").value; fillForm(k); $("f-company").value = name; toast("You already rated this employer. Editing your rating."); }
+  });
+
+  let saving = false;
+  async function writeMine(entries) {
+    await db.doc("reviews/" + me).set({ entries });
+  }
+
+  $("form").addEventListener("submit", async (ev) => {
+    ev.preventDefault(); if (saving) return;
+    const err = $("formErr"); err.hidden = true;
+    const company = $("f-company").value.trim().replace(/\s+/g, " ");
+    const k = keyOf(company); const overall = Number(getRadio("overall"));
+    if (!k) { err.textContent = "Enter the employer's name."; err.hidden = false; $("f-company").focus(); return; }
+    if (!getRadio("tenure")) { err.textContent = "Choose how long you've worked there."; err.hidden = false; return; }
+    if (!overall) { err.textContent = "Pick an overall rating from 1 to 5."; err.hidden = false; return; }
+    if (!$("f-agree").checked) { err.textContent = "Confirm you work or worked there and agree to the Terms and Privacy notice."; err.hidden = false; return; }
+    if (!me) { err.textContent = "Sign in to claude.ai to post a rating."; err.hidden = false; return; }
+    const cats = {}; CATS.forEach(([ck]) => { const v = Number(getRadio("c_" + ck)); if (v) cats[ck] = v; });
+    const entry = { company, role: $("f-role").value.trim(), division: $("f-division").value.trim().replace(/\s+/g, " "), flag: $("f-division").value.trim() ? (getRadio("flag") || "same") : "", status: getRadio("status"), tenure: getRadio("tenure"), overall, cats, pros: $("f-pros").value.trim(), cons: $("f-cons").value.trim(), award: getRadio("award") || "unsure", at: new Date().toISOString() };
+    const mineDoc = docs.find((d) => d.uid === me);
+    const entries = { ...(mineDoc?.entries || {}) };
+    if (editingKey && editingKey !== k) delete entries[editingKey];
+    entries[k] = entry;
+    saving = true; $("submitBtn").disabled = true;
+    try {
+      await writeMine(entries);
+      const cnt = companies.find((x) => x.key === k)?.reviews.length || 0;
+      const willCount = cnt + (docs.find((d) => d.uid === me)?.entries?.[k] ? 0 : 1);
+      toast(willCount < MIN_RATINGS ? `Saved. It shows once ${MIN_RATINGS} people rate this employer.` : (editingKey ? "Rating updated" : "Rating posted"));
+      openKey = k; $("formPanel").hidden = true; $("list").hidden = true;
+      if (!docs.some((d) => d.uid === me)) docs.push({ uid: me, entries }); else docs.find((d) => d.uid === me).entries = entries;
+      aggregate(); renderList(); renderDetail();
+    } catch (e) {
+      if (e?.code === "invalid_argument") { canWrite = false; applyWriteGate(); err.textContent = "You can read ratings but not post. Ask the page owner for Contributor access."; }
+      else if (e?.code === "quota_exceeded") err.textContent = "This board is full right now. Ask the page owner to clear old ratings.";
+      else err.textContent = "Your rating didn't save. Check your connection and try again.";
+      err.hidden = false;
+    } finally { saving = false; $("submitBtn").disabled = false; }
+  });
+
+  let confirmDel = false;
+  $("deleteMine").addEventListener("click", async () => {
+    const b = $("deleteMine");
+    if (!confirmDel) { confirmDel = true; b.textContent = "Tap again to delete"; setTimeout(() => { confirmDel = false; b.textContent = "Delete my rating"; }, 3000); return; }
+    confirmDel = false;
+    const mineDoc = docs.find((d) => d.uid === me); if (!mineDoc || !editingKey) return;
+    const entries = { ...mineDoc.entries }; delete entries[editingKey];
+    try { await writeMine(entries); mineDoc.entries = entries; toast("Rating deleted"); aggregate(); openKey = companies.some((c) => c.key === openKey) ? openKey : null; closeForm(); renderList(); }
+    catch { $("formErr").textContent = "Couldn't delete. Try again."; $("formErr").hidden = false; }
+  });
+
+  async function removeEntry(uid, k, btn) {
+    if (btn.dataset.armed !== "1") { btn.dataset.armed = "1"; btn.textContent = "Confirm remove"; setTimeout(() => { btn.dataset.armed = ""; btn.textContent = "Remove"; }, 3000); return; }
+    const d = docs.find((x) => x.uid === uid); if (!d) return;
+    const entries = { ...d.entries }; delete entries[k];
+    try { await db.doc("reviews/" + uid).set({ entries }); d.entries = entries; aggregate(); renderList(); renderDetail(); toast("Rating removed"); }
+    catch { toast("Couldn't remove that rating"); }
+  }
+
+  $("rateBtn").onclick = () => openForm(openKey);
+  $("cancelForm").onclick = closeForm;
+  $("q").addEventListener("input", () => { if (openKey) { openKey = null; $("detail").hidden = true; $("list").hidden = false; } renderList(); });
+  $("sort").addEventListener("change", renderList);
+
+  function applyWriteGate() {
+    $("rateBtn").hidden = !(canWrite && db);
+    if (!canWrite) $("status").textContent = "You can read every rating here. To post your own, ask the page owner for Contributor access.";
+  }
+
+  renderList();
+
+  (async () => {
+    const [d, user] = await Promise.all([window.claude?.use?.("db") ?? null, window.claude?.use?.("user") ?? null]);
+    db = d;
+    if (!db) { $("status").textContent = "Ratings can't load here. Open this page on claude.ai while signed in."; $("rateBtn").hidden = true; return; }
+    if (user) {
+      try { me = await user.id(); } catch {}
+      try { isOwner = !!(await user.isOwner()); } catch {}
+      try { const w = await user.can("data.write"); if (w === false) canWrite = false; } catch {}
+    }
+    if (!me) canWrite = false;
+    applyWriteGate();
+    const timer = setTimeout(() => { $("status").textContent = docs.length ? "Showing saved ratings. They may be out of date." : "Can't reach the ratings yet. They'll appear when the connection comes back."; }, 10000);
+    db.collection("reviews").onSnapshot((snap) => {
+      if (!snap.metadata.fromCache) clearTimeout(timer);
+      docs = snap.docs.map((s) => ({ uid: s.id, entries: s.data()?.entries || {} }));
+      aggregate(); renderList(); if (openKey) renderDetail();
+      const n = companies.reduce((a, c) => a + c.reviews.length, 0);
+      if (canWrite) $("status").textContent = n ? `${n} rating${n === 1 ? "" : "s"} across ${companies.length} employer${companies.length === 1 ? "" : "s"}.` : "No ratings yet.";
+    }, () => { clearTimeout(timer); $("status").textContent = "Ratings stopped updating. Reload the page to reconnect."; });
+  })();
+})();
+</script>
+
+</body>
+</html>

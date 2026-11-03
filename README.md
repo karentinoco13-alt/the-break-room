@@ -1,0 +1,32 @@
+# The Break Room
+
+Customers have rated companies forever. Now it's the employees' turn.
+
+**The Break Room** lets employees rate their employer from 1 to 5: the good, the bad and the worst. No sponsored badges. No paid awards. Just the people who clock in.
+
+## What it does
+
+- **Rate 1 to 5:** 1 Get out · 2 Bad · 3 It's a job · 4 Good · 5 Great, each with a plain-language meaning
+- **Five categories:** pay & benefits, management, work-life balance, culture & respect, growth
+- **Time at the company:** every rating shows how long the person has worked there and whether they still do, so experience carries weight
+- **Divisions and groups:** flag a division, team or location as better or worse than the rest of the company
+- **Award check:** would the people who work there agree with a "Best Employer" award?
+- **What people say, score by score:** comments grouped by rating, longest-serving employees first
+- **The research:** what bad working conditions cost in stress, health and life expectancy, with sources
+
+## Built to protect the people who rate
+
+- One rating per person per employer, so no company can flood its own page
+- Names, emails and photos are never shown with ratings
+- An employer's scores and comments appear only after **5 people** have rated it, and the same applies to each division or group
+- People can edit or delete their ratings, or erase all their data, at any time
+
+## Status
+
+The app is a single `index.html`. It currently stores ratings with the Claude artifact service, and it is moving to Supabase (database and sign-in) with hosting on GitHub Pages. Until that switch, this copy loads but cannot save or show ratings.
+
+## License
+
+© 2026 Karen Tinoco. Licensed under [PolyForm Noncommercial 1.0.0](LICENSE): free to view, run, and adapt for non-commercial use. Commercial use by permission only.
+
+Designed and directed by the author; implemented with Claude Code as an AI pair programmer. Ratings are the opinions of individual employees. Not affiliated with or endorsed by any employer named in the app.
