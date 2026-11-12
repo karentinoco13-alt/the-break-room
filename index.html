@@ -643,14 +643,16 @@ footer .small { font-size: 13px; opacity: .85; }
       <section id="sec-privacy" aria-labelledby="privH">
         <h3 id="privH">Privacy and security</h3>
         <ul>
-          <li><b>What is stored.</b> Your scores, comments, the role, division and employment status you enter, the date, and an anonymous account ID. Feedback you send and votes you cast are stored the same way.</li>
+          <li><b>What is stored.</b> Your scores, comments, the role, division and employment status you enter, the date, and an anonymous account ID. Votes you cast are stored the same way.</li>
           <li><b>Why the ID.</b> It links a rating to your account so you can edit or delete it, and so each person rates an employer only once.</li>
           <li><b>What is never stored.</b> This app never saves or shows your name, email address or photo.</li>
-          <li><b>Who sees what.</b> Everyone with access sees ratings and comments, with no names, and only for employers with at least 5 ratings. This is a display rule in the app, not encryption. The developer can see the anonymous ID but not your name. Your feedback goes only to the developer.</li>
+          <li><b>Who sees what.</b> Everyone with access sees ratings and comments, with no names, and only for employers with at least 5 ratings. This is a display rule in the app, not encryption. The developer can see the anonymous ID but not your name.</li>
+          <li><b>Feedback.</b> Feedback you send is delivered privately to the app's developer and stored in the developer's Google account. Only what you type in the feedback box is sent.</li>
           <li><b>Where it lives.</b> Data is stored by the Claude artifact service that hosts this app, so Anthropic's privacy policy also applies. Access is limited by sharing permissions and per-person write rules.</li>
           <li><b>In this browser.</b> The only thing saved on your device is that you accepted these terms.</li>
-          <li><b>No tracking.</b> No ads, no tracking cookies, no analytics. Your data is never sold.</li>
-          <li><b>Your control.</b> Use "Delete all my data" at the bottom of the page to erase your ratings and feedback. Deleting is permanent.</li>
+          <li><b>No tracking.</b> No ads, no tracking cookies. Your data is never sold.</li>
+          <li><b>Visit counts.</b> Page visits are counted with GoatCounter, which uses no cookies and does not collect personal data.</li>
+          <li><b>Your control.</b> Use "Delete all my data" at the bottom of the page to erase your ratings and feedback stored in the app. Feedback already delivered to the developer can't be recalled here. Deleting is permanent.</li>
         </ul>
       </section>
       <section id="sec-license" aria-labelledby="licH">
@@ -664,7 +666,7 @@ footer .small { font-size: 13px; opacity: .85; }
       </section>
       <section id="sec-feedback" class="feedback" aria-labelledby="fbH">
         <h3 id="fbH">Send feedback</h3>
-        <label class="label" for="fb-text">Your feedback goes only to the developer and is used to plan future versions.</label>
+        <label class="label" for="fb-text">Your feedback is delivered privately to the developer and is used to plan future versions.</label>
         <textarea id="fb-text" maxlength="2000" placeholder="What works, what doesn't, what you'd add"></textarea>
         <div class="bar"><button class="btn" type="button" id="fbSend">Send feedback</button><span class="note" id="fbNote"></span></div>
       </section>
@@ -693,7 +695,7 @@ footer .small { font-size: 13px; opacity: .85; }
       <ul class="gate-list">
         <li><b>Your privacy comes first.</b> Your name, email and photo are never shown with a rating, and no employer can see who wrote it. Ratings are stored with an anonymous account ID by the service that hosts this app.</li>
         <li><b>Professional decorum required.</b> Be honest, and keep proper manners and vocabulary. Profanity is not accepted in this app.</li>
-        <li><b>Free while testing.</b> The Break Room is free to use while it's being tested for feedback. Your feedback goes only to the app's developer and is used to plan future versions.</li>
+        <li><b>Free while testing.</b> The Break Room is free to use while it's being tested for feedback. Your feedback is delivered privately to the app's developer and is used to plan future versions.</li>
         <li><b>Honest, first-hand ratings.</b> Only rate an employer you work or worked for, based on your own experience. No paid, rewarded or fake ratings.</li>
         <li><b>Safety in numbers.</b> An employer's scores and comments appear only after 5 people have rated it.</li>
         <li><b>Rate the company, not people.</b> Don't name coworkers or managers or post anything that identifies someone.</li>
@@ -821,17 +823,32 @@ footer .small { font-size: 13px; opacity: .85; }
   $("gateDecline").addEventListener("click", () => { $("gateMain").hidden = true; $("gateDeclined").hidden = false; });
   $("gateBack").addEventListener("click", showGate);
 
+  const FEEDBACK_ENDPOINT = '';  // Google Apps Script web app URL; set by owner
+  async function sendFeedbackToOwner(payload) { // payload = {app, page, language, ...form fields, submitted}
+    if (!FEEDBACK_ENDPOINT) return false;
+    const body = JSON.stringify(payload);
+    try { const r = await fetch(FEEDBACK_ENDPOINT, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body }); return r.ok; }
+    catch (e) { try { await fetch(FEEDBACK_ENDPOINT, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body }); return true; } catch (e2) { return false; } }
+  }
+
   $("fbSend").addEventListener("click", async () => {
     const txt = $("fb-text").value.trim(); const note = $("fbNote");
     if (findProfanity(txt)) { note.textContent = "Please keep it professional. Rephrase without profanity and send again."; return; }
     if (!txt) { note.textContent = "Write something first."; return; }
-    if (!db || !me) { note.textContent = "Sign in to claude.ai to send feedback."; return; }
+    if (!FEEDBACK_ENDPOINT && (!db || !me)) { note.textContent = "Sign in to claude.ai to send feedback."; return; }
     $("fbSend").disabled = true;
     try {
-      const ref = db.doc("feedback/" + me); const cur = await ref.get();
-      const items = (cur.exists && Array.isArray(cur.data().items) ? cur.data().items : []).slice(-49);
-      items.push({ text: txt, at: new Date().toISOString() });
-      await ref.set({ items });
+      const sent = await sendFeedbackToOwner({ app: "The Break Room", page: location.href, language: document.documentElement.lang || "en", type: "feedback", message: txt, submitted: new Date().toISOString() });
+      let saved = false;
+      if (db && me) {
+        try {
+          const ref = db.doc("feedback/" + me); const cur = await ref.get();
+          const items = (cur.exists && Array.isArray(cur.data().items) ? cur.data().items : []).slice(-49);
+          items.push({ text: txt, at: new Date().toISOString() });
+          await ref.set({ items }); saved = true;
+        } catch {}
+      }
+      if (!sent && !saved) throw new Error("not sent");
       $("fb-text").value = ""; note.textContent = "Sent. Thank you."; toast("Feedback sent");
     } catch { note.textContent = "Your feedback didn't send. Try again."; }
     finally { $("fbSend").disabled = false; }
@@ -1308,5 +1325,6 @@ footer .small { font-size: 13px; opacity: .85; }
 })();
 </script>
 
+<script data-goatcounter="https://karentinoco13.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
