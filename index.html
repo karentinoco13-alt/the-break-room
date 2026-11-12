@@ -341,10 +341,10 @@ label[for="f-pros"] { color: var(--s5); font-weight: 700; } label[for="f-cons"] 
 .legal > summary { cursor: pointer; padding: 16px 20px; font-family: var(--f-display); font-weight: 800; font-stretch: 85%; font-size: 20px; color: var(--hero); list-style: none; display: flex; justify-content: space-between; gap: 12px; }
 .legal > summary::after { content: "+"; font-size: 24px; line-height: 1; color: var(--pop); }
 .legal[open] > summary::after { content: "–"; }
-.legal-body { padding: 0 20px 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.legal-body { padding: 0 20px 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 20px; }
 .legal-body section { min-width: 0; }
 .legal-body h3 { font-size: 18px; font-weight: 800; font-stretch: 90%; margin-bottom: 6px; color: var(--c-mgmt); }
-.legal-body ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 14px; max-width: 65ch; }
+.legal-body ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 14px; max-width: 65ch; overflow-wrap: anywhere; }
 .legal-body .note { grid-column: 1 / -1; }
 .agree { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; }
 .agree input { width: 20px; height: 20px; accent-color: var(--pop); margin-top: 1px; flex: none; }
@@ -356,24 +356,19 @@ footer .links { display: flex; flex-wrap: wrap; gap: 4px 0; }
 footer .links button { background: none; border: 0; padding: 0; color: var(--sun); text-decoration: underline; cursor: pointer; font: inherit; }
 footer .links span { padding: 0 6px; }
 footer .small { font-size: 13px; opacity: .85; }
-.gate { position: fixed; inset: 0; z-index: 50; background: color-mix(in srgb, var(--bg) 70%, transparent); backdrop-filter: blur(6px); display: grid; place-items: start center; overflow-y: auto; padding: calc(24px + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) calc(24px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
-.gate-card { width: 100%; max-width: 560px; background: var(--paper); border: 2px solid var(--c-balance); border-radius: 14px; overflow: hidden; box-shadow: 0 20px 50px color-mix(in srgb, var(--hero) 30%, transparent); }
-.gate-brand { background: var(--hero); color: #fff; padding: 12px 18px; font-family: var(--f-display); font-weight: 800; font-size: 17px; border-bottom: 3px solid var(--sun); }
-.gate-head { background: var(--c-balance); color: #fff; padding: 16px 18px; }
-.gate-head h2 { font-size: 24px; font-weight: 800; }
-.gate-body { padding: 16px 18px 18px; display: grid; gap: 14px; }
-.gate-body p { margin: 0; font-size: 14px; }
-.gate-list { border: 1.5px solid var(--c-balance); border-radius: 8px; max-height: 260px; overflow-y: auto; padding: 12px 14px 12px 30px; margin: 0; display: grid; gap: 8px; font-size: 13.5px; }
-.gate-list li::marker { color: var(--c-balance); }
-.gate-list b { color: var(--c-balance); }
-.gate-links { display: flex; flex-wrap: wrap; gap: 8px; }
-.gate-links button { border: 1.5px solid var(--c-balance); color: var(--c-balance); background: var(--paper); border-radius: 6px; padding: 5px 10px; font-size: 12px; font-weight: 700; cursor: pointer; }
-.gate-accept { display: flex; gap: 10px; align-items: center; background: color-mix(in srgb, var(--sun) 20%, var(--paper)); border: 1.5px solid var(--sun); border-radius: 8px; padding: 12px 14px; font-size: 14px; font-weight: 600; }
-.gate-accept input { width: 20px; height: 20px; accent-color: var(--c-balance); flex: none; }
-.gate-actions { display: flex; justify-content: flex-end; gap: 10px; flex-wrap: wrap; }
-.gate-actions .btn { box-shadow: none; border-radius: 8px; }
-#gateAccept { background: var(--c-balance); }
-#gateDecline { background: var(--paper); color: var(--c-balance); border: 1.5px solid var(--c-balance); }
+.notice { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; background: var(--hero); color: #fff; border-top: 3px solid var(--sun); padding: 8px max(16px, env(safe-area-inset-right, 0px)) calc(8px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); display: flex; align-items: center; justify-content: center; gap: 6px 14px; flex-wrap: wrap; font-size: 14px; }
+.notice p { margin: 0; }
+.notice .linkish { color: var(--sun); padding: 10px 0; }
+.notice .btn { padding: 8px 20px; min-height: 40px; box-shadow: none; }
+body.has-notice .toast { bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
+body.has-notice footer { margin-bottom: 72px; }
+.sample-bar { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; border-radius: 10px; padding: 10px 14px; background: color-mix(in srgb, var(--sun) 22%, var(--paper)); border-left: 5px solid var(--sun); font-size: 14px; }
+.sample-bar span { flex: 1 1 220px; }
+.fb-rate span { padding: 8px 4px; } .fb-rate span b { font-size: 20px; }
+.fb-alt { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+footer .links button { min-height: 40px; }
+.btn.danger { min-height: 40px; }
+@media (max-width: 640px) { input, textarea, select { font-size: 16px; } }
 .legal-body section { scroll-margin-top: 16px; }
 .danger-zone { display: grid; gap: 8px; padding: 14px; border: 2px solid var(--s1); border-radius: 10px; background: var(--s1-bg); }
 .feedback { display: grid; gap: 10px; }
@@ -564,6 +559,7 @@ footer .small { font-size: 13px; opacity: .85; }
 
       <p class="rules"><b>Say it all, and keep it professional.</b> Proper manners and vocabulary only: profanity isn't accepted and will stop your rating from posting. <b>Your name is never shown.</b> To stay invisible, leave out details only you would know, like an exact date or a one-of-a-kind incident. Rate the company, the team and the tools, never a person by name. You get one rating per employer, and you can edit or delete it any time.</p>
       <label class="agree" for="f-agree"><input type="checkbox" id="f-agree"> <span>I'm a current or former employee of this company, this is my own honest experience, and I agree to the <button type="button" class="linkish" id="openLegal">Terms and Privacy notice</button>.</span></label>
+      <p class="note" id="localNote" hidden style="margin:0">Your rating is saved only in this browser and is visible only on this device.</p>
       <p class="err" id="formErr" hidden></p>
       <div class="bar">
         <button class="btn" type="submit" id="submitBtn">Post rating</button>
@@ -637,6 +633,7 @@ footer .small { font-size: 13px; opacity: .85; }
           <li><b>Minimum of 5 ratings.</b> An employer's scores, award check and comments are shown only after 5 people have rated it, so nobody can work out who wrote what.</li>
           <li><b>Moderation.</b> One rating per employer per person. The developer may remove any rating that breaks these terms.</li>
           <li><b>Provided as is.</b> The app is provided "as is" and "as available", without warranties of any kind. To the extent the law allows, the developer is not liable for any direct or indirect loss arising from its use, including loss of data.</li>
+          <li><b>Accepting these terms.</b> There is no sign-up step: using the app means you accept these terms and the Privacy notice. Before you post a rating you confirm it again with one checkbox.</li>
           <li><b>Changes.</b> These terms may change as the app develops. Continuing to use the app means you accept the current version.</li>
         </ul>
       </section>
@@ -647,9 +644,9 @@ footer .small { font-size: 13px; opacity: .85; }
           <li><b>Why the ID.</b> It links a rating to your account so you can edit or delete it, and so each person rates an employer only once.</li>
           <li><b>What is never stored.</b> This app never saves or shows your name, email address or photo.</li>
           <li><b>Who sees what.</b> Everyone with access sees ratings and comments, with no names, and only for employers with at least 5 ratings. This is a display rule in the app, not encryption. The developer can see the anonymous ID but not your name.</li>
-          <li><b>Feedback.</b> Feedback you send is delivered privately to the app's developer and stored in the developer's Google account. Only what you type in the feedback box is sent.</li>
-          <li><b>Where it lives.</b> Data is stored by the Claude artifact service that hosts this app, so Anthropic's privacy policy also applies. Access is limited by sharing permissions and per-person write rules.</li>
-          <li><b>In this browser.</b> The only thing saved on your device is that you accepted these terms.</li>
+          <li><b>Feedback.</b> Feedback you send is delivered privately to the app's developer and stored in the developer's Google account. Only the optional score and what you type in the feedback box are sent, with the page address and language. If you choose "Open on GitHub" instead, your feedback is posted publicly on GitHub under your GitHub account.</li>
+          <li><b>Where it lives.</b> When the app runs on claude.ai, data is stored by the Claude artifact service that hosts it, so Anthropic's privacy policy also applies. Access is limited by sharing permissions and per-person write rules. Anywhere else (for example the public GitHub Pages site), ratings and votes you post are saved only in this browser: they are not sent anywhere and are visible only on this device.</li>
+          <li><b>In this browser.</b> Your device remembers that you closed the terms notice. Outside claude.ai it also keeps the ratings and votes you post, and nothing else.</li>
           <li><b>No tracking.</b> No ads, no tracking cookies. Your data is never sold.</li>
           <li><b>Visit counts.</b> Page visits are counted with GoatCounter, which uses no cookies and does not collect personal data.</li>
           <li><b>Your control.</b> Use "Delete all my data" at the bottom of the page to erase your ratings and feedback stored in the app. Feedback already delivered to the developer can't be recalled here. Deleting is permanent.</li>
@@ -666,13 +663,17 @@ footer .small { font-size: 13px; opacity: .85; }
       </section>
       <section id="sec-feedback" class="feedback" aria-labelledby="fbH">
         <h3 id="fbH">Send feedback</h3>
-        <label class="label" for="fb-text">Your feedback is delivered privately to the developer and is used to plan future versions.</label>
+        <p class="note" style="margin:0;color:var(--ink)">No account needed. Everything is optional. It goes privately to the developer and helps plan future versions.</p>
+        <span class="label" id="fbRateLbl">How useful is The Break Room? (optional)</span>
+        <div class="punch fb-rate" id="fbRate" role="radiogroup" aria-labelledby="fbRateLbl"></div>
+        <label class="label" for="fb-text">Comment (optional)</label>
         <textarea id="fb-text" maxlength="2000" placeholder="What works, what doesn't, what you'd add"></textarea>
-        <div class="bar"><button class="btn" type="button" id="fbSend">Send feedback</button><span class="note" id="fbNote"></span></div>
+        <div class="bar"><button class="btn" type="button" id="fbSend">Send</button><span class="note" id="fbNote" role="status"></span></div>
+        <div class="fb-alt" id="fbAlt" hidden><span class="note">Couldn't send it from here. You can copy it or post it on GitHub instead:</span><button class="btn ghost" type="button" id="fbCopy">Copy feedback</button><a class="btn ghost" id="fbGh" href="https://github.com/karentinoco13-alt/the-break-room/issues/new" target="_blank" rel="noopener" style="text-decoration:none">Open on GitHub</a></div>
       </section>
       <section id="sec-delete" class="danger-zone" aria-labelledby="delH">
         <h3 id="delH" style="color: var(--s1)">Delete all my data</h3>
-        <p class="note" style="color: var(--ink); margin: 0">Erases every rating and all feedback you've posted, and your acceptance of the terms on this device. This can't be undone.</p>
+        <p class="note" style="color: var(--ink); margin: 0">Erases every rating, vote and all feedback you've posted, and everything this app saved on this device. This can't be undone.</p>
         <div class="bar"><button class="btn danger" type="button" id="delAll">Delete all my data</button><span class="note" id="delNote"></span></div>
       </section>
       <p class="note">Effective November 3, 2026.</p>
@@ -686,33 +687,9 @@ footer .small { font-size: 13px; opacity: .85; }
   </footer>
 </div>
 <div class="toast" id="toast" hidden role="status"></div>
-<div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gateTitle" hidden>
-  <div class="gate-card">
-    <div class="gate-brand">The Break Room</div>
-    <div class="gate-head"><h2 id="gateTitle">Before you start: Terms of use</h2></div>
-    <div class="gate-body" id="gateMain">
-      <p>Please read this summary of the Terms of use. You need to accept them before you can use the app.</p>
-      <ul class="gate-list">
-        <li><b>Your privacy comes first.</b> Your name, email and photo are never shown with a rating, and no employer can see who wrote it. Ratings are stored with an anonymous account ID by the service that hosts this app.</li>
-        <li><b>Professional decorum required.</b> Be honest, and keep proper manners and vocabulary. Profanity is not accepted in this app.</li>
-        <li><b>Free while testing.</b> The Break Room is free to use while it's being tested for feedback. Your feedback is delivered privately to the app's developer and is used to plan future versions.</li>
-        <li><b>Honest, first-hand ratings.</b> Only rate an employer you work or worked for, based on your own experience. No paid, rewarded or fake ratings.</li>
-        <li><b>Safety in numbers.</b> An employer's scores and comments appear only after 5 people have rated it.</li>
-        <li><b>Rate the company, not people.</b> Don't name coworkers or managers or post anything that identifies someone.</li>
-        <li><b>Opinions, not facts.</b> Ratings are the views of the people who wrote them. They are not verified, and the app is not affiliated with any employer listed.</li>
-        <li><b>Deleting is permanent.</b> You can delete your ratings and feedback at any time. Deleted data cannot be recovered.</li>
-        <li><b>Provided as is.</b> The app is provided "as is" and "as available", without warranties of any kind. To the extent the law allows, its developer is not liable for any direct or indirect loss arising from its use.</li>
-        <li><b>Copyright.</b> © 2026 Karen Tinoco. Licensed under PolyForm Noncommercial 1.0.0. Commercial use by permission only.</li>
-      </ul>
-      <div class="gate-links"><button type="button" data-open="sec-terms">Read the full Terms of use</button><button type="button" data-open="sec-privacy">Privacy &amp; security</button><button type="button" data-open="sec-license">License</button></div>
-      <label class="gate-accept" for="gateCheck"><input type="checkbox" id="gateCheck"> I have read and accept the Terms of use and the Privacy &amp; security notice</label>
-      <div class="gate-actions"><button class="btn" type="button" id="gateDecline">Decline</button><button class="btn" type="button" id="gateAccept" disabled>Accept and continue</button></div>
-    </div>
-    <div class="gate-body" id="gateDeclined" hidden>
-      <p>You need to accept the Terms of use and the Privacy &amp; security notice to use The Break Room. Nothing has been saved.</p>
-      <div class="gate-actions"><button class="btn" type="button" id="gateBack">Review the terms again</button></div>
-    </div>
-  </div>
+<div class="notice" id="notice" role="region" aria-label="Terms notice" hidden>
+  <p>By using this app you agree to the <button type="button" class="linkish" data-open="sec-terms">Terms</button> and <button type="button" class="linkish" data-open="sec-privacy">Privacy</button>.</p>
+  <button class="btn" type="button" id="noticeOk">OK</button>
 </div>
 
 <script>
@@ -757,7 +734,31 @@ footer .small { font-size: 13px; opacity: .85; }
   const scoreColor = (v) => v == null ? "var(--rule)" : `var(--s${Math.min(5, Math.max(1, Math.round(v)))})`;
   const keyOf = (name) => name.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 
-  let db = null, me = null, isOwner = false, canWrite = true;
+  let db = null, me = null, isOwner = false, canWrite = true, localMode = false, sampleOn = false;
+  // Fictional sample employer so first-time visitors can see a full page in one tap. Never saved anywhere.
+  const SAMPLE = [
+    [4, "current", "3-5", { pay: 3, mgmt: 4, balance: 4, culture: 4, growth: 3 }, "Clear schedules posted two weeks ahead, and the team covers for each other.", "Raises are small and slow.", "yes"],
+    [3, "current", "1-2", { pay: 3, mgmt: 3, balance: 3, culture: 3, growth: 2 }, "Decent benefits and a fair manager.", "The scheduling tool crashes every Monday.", "unsure"],
+    [4, "former", "6-10", { pay: 4, mgmt: 4, balance: 3, culture: 4, growth: 4 }, "Training was real, and promotions came from inside.", "Busy season means long weeks.", "yes"],
+    [2, "former", "lt1", { pay: 2, mgmt: 2, balance: 2, culture: 3, growth: 2 }, "Friendly coworkers.", "Onboarding was a binder and a goodbye.", "no"],
+    [5, "current", "10plus", { pay: 4, mgmt: 5, balance: 5, culture: 5, growth: 4 }, "They listen when you suggest a better way to do the job.", "Parking is a mess.", "yes"],
+  ].map(([overall, status, tenure, cats, pros, cons, award], i) => ({ uid: "sample-" + i, entries: { [keyOf("Example Co. (fictional sample)")]: { company: "Example Co. (fictional sample)", role: "", division: "", flag: "", status, tenure, journey: { hire: Math.max(1, overall - 1), onboard: overall }, overall, cats, pros, cons, award, sample: true, at: `2026-10-0${i + 1}T12:00:00.000Z` } } }));
+  function setSample(on) { sampleOn = on; aggregate(); if (!on && companies.every((c) => c.key !== openKey)) { openKey = null; $("detail").hidden = true; $("list").hidden = false; } renderList(); if (openKey) renderDetail(); }
+  // Without the claude.ai database, ratings and votes are kept only in this browser.
+  function localDb() {
+    const KEY = "br-local-db", subs = {}; let mem = null;
+    const load = () => { if (!mem) { try { mem = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch { mem = {}; } } return mem; };
+    const save = () => { try { localStorage.setItem(KEY, JSON.stringify(mem)); } catch {} };
+    const snap = (col) => ({ metadata: { fromCache: false }, docs: Object.entries(load()[col] || {}).map(([id, v]) => ({ id, data: () => v })) });
+    const emit = (col) => (subs[col] || []).forEach((cb) => cb(snap(col)));
+    return {
+      doc(path) { const [col, id] = path.split("/"); return {
+        async get() { const v = load()[col]?.[id]; return { exists: v !== undefined, data: () => v }; },
+        async set(v) { const m = load(); (m[col] = m[col] || {})[id] = JSON.parse(JSON.stringify(v)); save(); emit(col); },
+        async delete() { const m = load(); if (m[col]) delete m[col][id]; save(); emit(col); } }; },
+      collection(col) { return { onSnapshot(cb) { (subs[col] = subs[col] || []).push(cb); setTimeout(() => cb(snap(col)), 0); return () => {}; } }; },
+    };
+  }
   let docs = []; // [{uid, entries}]
   let companies = []; // aggregated
   let openKey = null, editingKey = null;
@@ -803,25 +804,14 @@ footer .small { font-size: 13px; opacity: .85; }
   const store = { get(k) { try { return localStorage.getItem(k); } catch { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch {} }, del(k) { try { localStorage.removeItem(k); } catch {} } };
   function openSection(id) {
     $("legal").open = true;
-    const g = $("gate"); if (!g.hidden) { g.dataset.peek = "1"; g.hidden = true; }
     $(id).scrollIntoView({ block: "start", behavior: "smooth" });
-    if (g.dataset.peek) showBackToGate();
-  }
-  function showBackToGate() {
-    if ($("backGate")) return;
-    const b = el("button", "btn", "Back to accept the terms"); b.id = "backGate"; b.type = "button";
-    Object.assign(b.style, { position: "fixed", right: "max(16px, env(safe-area-inset-right, 0px))", bottom: "calc(16px + env(safe-area-inset-bottom, 0px))", zIndex: 40 });
-    b.onclick = () => { b.remove(); delete $("gate").dataset.peek; $("gate").hidden = false; $("gateCheck").focus(); };
-    document.body.append(b);
   }
   document.addEventListener("click", (e) => { const t = e.target.closest("[data-open]"); if (t) openSection(t.dataset.open); });
   $("openLegal").addEventListener("click", () => openSection("sec-terms"));
-  function showGate() { $("gateMain").hidden = false; $("gateDeclined").hidden = true; $("gateCheck").checked = false; $("gateAccept").disabled = true; $("gate").hidden = false; }
-  if (store.get("br-terms") !== TERMS_VERSION) showGate();
-  $("gateCheck").addEventListener("change", () => { $("gateAccept").disabled = !$("gateCheck").checked; });
-  $("gateAccept").addEventListener("click", () => { store.set("br-terms", TERMS_VERSION); $("gate").hidden = true; $("backGate")?.remove(); toast("Welcome to The Break Room"); });
-  $("gateDecline").addEventListener("click", () => { $("gateMain").hidden = true; $("gateDeclined").hidden = false; });
-  $("gateBack").addEventListener("click", showGate);
+  // Non-blocking terms notice: using the app counts as acceptance; OK just hides the notice.
+  function showNotice() { $("notice").hidden = false; document.body.classList.add("has-notice"); }
+  if (store.get("br-terms") !== TERMS_VERSION) showNotice();
+  $("noticeOk").addEventListener("click", () => { store.set("br-terms", TERMS_VERSION); $("notice").hidden = true; document.body.classList.remove("has-notice"); });
 
   const FEEDBACK_ENDPOINT = '';  // Google Apps Script web app URL; set by owner
   async function sendFeedbackToOwner(payload) { // payload = {app, page, language, ...form fields, submitted}
@@ -831,27 +821,38 @@ footer .small { font-size: 13px; opacity: .85; }
     catch (e) { try { await fetch(FEEDBACK_ENDPOINT, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body }); return true; } catch (e2) { return false; } }
   }
 
+  punch($("fbRate"), "fbrate", false);
+  const fbText = () => { const r = getRadio("fbrate"), t = $("fb-text").value.trim(); return [r ? `Rating: ${r}/5` : "", t].filter(Boolean).join("\n\n"); };
   $("fbSend").addEventListener("click", async () => {
-    const txt = $("fb-text").value.trim(); const note = $("fbNote");
+    const txt = $("fb-text").value.trim(); const rate = Number(getRadio("fbrate")) || null; const note = $("fbNote");
+    $("fbAlt").hidden = true;
     if (findProfanity(txt)) { note.textContent = "Please keep it professional. Rephrase without profanity and send again."; return; }
-    if (!txt) { note.textContent = "Write something first."; return; }
-    if (!FEEDBACK_ENDPOINT && (!db || !me)) { note.textContent = "Sign in to claude.ai to send feedback."; return; }
-    $("fbSend").disabled = true;
+    if (!txt && !rate) { note.textContent = "Pick a score or write a comment first."; return; }
+    $("fbSend").disabled = true; note.textContent = "Sending…";
     try {
-      const sent = await sendFeedbackToOwner({ app: "The Break Room", page: location.href, language: document.documentElement.lang || "en", type: "feedback", message: txt, submitted: new Date().toISOString() });
+      const sent = await sendFeedbackToOwner({ app: "The Break Room", page: location.href, language: document.documentElement.lang || "en", type: "feedback", rating: rate, message: txt, submitted: new Date().toISOString() });
       let saved = false;
-      if (db && me) {
+      if (db && me && !localMode) {
         try {
           const ref = db.doc("feedback/" + me); const cur = await ref.get();
           const items = (cur.exists && Array.isArray(cur.data().items) ? cur.data().items : []).slice(-49);
-          items.push({ text: txt, at: new Date().toISOString() });
+          items.push({ text: txt, rating: rate, at: new Date().toISOString() });
           await ref.set({ items }); saved = true;
         } catch {}
       }
       if (!sent && !saved) throw new Error("not sent");
-      $("fb-text").value = ""; note.textContent = "Sent. Thank you."; toast("Feedback sent");
-    } catch { note.textContent = "Your feedback didn't send. Try again."; }
+      $("fb-text").value = ""; clearRadio("fbrate"); note.textContent = "Sent. Thank you."; toast("Feedback sent");
+    } catch {
+      note.textContent = FEEDBACK_ENDPOINT ? "Your feedback didn't send." : "";
+      $("fbGh").href = "https://github.com/karentinoco13-alt/the-break-room/issues/new?title=" + encodeURIComponent("Feedback") + "&body=" + encodeURIComponent(fbText());
+      $("fbAlt").hidden = false;
+    }
     finally { $("fbSend").disabled = false; }
+  });
+  $("fbCopy").addEventListener("click", async () => {
+    const t = fbText(); if (!t) return;
+    try { await navigator.clipboard.writeText(t); toast("Feedback copied"); }
+    catch { $("fb-text").focus(); $("fb-text").select(); toast("Select the text and copy it"); }
   });
 
   let delArmed = false;
@@ -859,12 +860,12 @@ footer .small { font-size: 13px; opacity: .85; }
     const b = $("delAll"), note = $("delNote");
     if (!delArmed) { delArmed = true; b.textContent = "Tap again to erase everything"; setTimeout(() => { delArmed = false; b.textContent = "Delete all my data"; }, 4000); return; }
     delArmed = false; b.textContent = "Delete all my data";
-    if (!db || !me) { store.del("br-terms"); note.textContent = "Nothing stored for you here besides your acceptance, which is now cleared."; return; }
+    if (!db || !me) { store.del("br-terms"); note.textContent = "Nothing was stored for you here."; return; }
     b.disabled = true;
     try {
       await db.doc("reviews/" + me).delete(); await db.doc("feedback/" + me).delete(); await db.doc("votes/" + me).delete();
-      store.del("br-terms"); docs = docs.filter((d) => d.uid !== me); aggregate(); renderList(); if (openKey) renderDetail();
-      note.textContent = "All your data is deleted."; toast("All your data is deleted"); setTimeout(showGate, 1500);
+      store.del("br-terms"); store.del("br-local-db"); docs = docs.filter((d) => d.uid !== me); myVotes = {}; aggregate(); renderList(); if (openKey) renderDetail();
+      note.textContent = "All your data is deleted."; toast("All your data is deleted");
     } catch { note.textContent = "Couldn't delete everything. Try again."; }
     finally { b.disabled = false; }
   });
@@ -874,7 +875,7 @@ footer .small { font-size: 13px; opacity: .85; }
 
   function aggregate() {
     const map = new Map();
-    for (const d of docs) for (const [k, e] of Object.entries(d.entries || {})) {
+    for (const d of (sampleOn ? docs.concat(SAMPLE) : docs)) for (const [k, e] of Object.entries(d.entries || {})) {
       if (!e || typeof e.overall !== "number" || e.overall < 1 || e.overall > 5) continue;
       let c = map.get(k);
       if (!c) { c = { key: k, name: String(e.company || k), reviews: [] }; map.set(k, c); }
@@ -943,7 +944,7 @@ footer .small { font-size: 13px; opacity: .85; }
       : s === "recent" ? String(b.latest).localeCompare(String(a.latest))
       : b.reviews.length - a.reviews.length || b.avg - a.avg);
 
-    const dl = $("companyList"); dl.replaceChildren(...companies.map((c) => { const o = el("option"); o.value = c.name; return o; }));
+    const dl = $("companyList"); dl.replaceChildren(...companies.filter((c) => !c.reviews.every((r) => r.sample)).map((c) => { const o = el("option"); o.value = c.name; return o; }));
 
     if (!companies.length) {
       const e = el("div", "empty"); e.style.gridColumn = "1 / -1";
@@ -955,14 +956,18 @@ footer .small { font-size: 13px; opacity: .85; }
       const es = el("div", "empty-scale");
       for (let i = 1; i <= 5; i++) { const b = el("div"); b.style.background = `var(--s${i})`; b.append(el("b", null, String(i)), document.createTextNode(LABELS[i])); es.append(b); }
       e.append(es);
-      if (canWrite && db) { const b = el("button", "btn", "Rate your employer"); b.type = "button"; b.style.justifySelf = "start"; b.onclick = openForm; e.append(b); }
+      const eb = el("div", "bar");
+      if (canWrite && db) { const b = el("button", "btn", "Rate your employer"); b.type = "button"; b.onclick = openForm; eb.append(b); }
+      { const b = el("button", "btn ghost", "Try with sample data"); b.type = "button"; b.onclick = () => setSample(true); eb.append(b); }
+      e.append(eb, el("p", "note", "The sample is a made-up employer with made-up ratings, so you can see what a full page looks like. It isn't saved and you can clear it any time."));
       list.append(e); return;
     }
+    if (sampleOn) { const sb = el("div", "sample-bar"); const cb = el("button", "btn ghost", "Clear sample"); cb.type = "button"; cb.onclick = () => setSample(false); sb.append(el("span", null, "Showing Example Co., a fictional sample with made-up ratings. Not a real company, and not saved."), cb); list.append(sb); }
     if (!items.length) { const e = el("p", "note", `No employer matches "${$("q").value}". Rate it and it will show up here.`); e.style.gridColumn = "1 / -1"; list.append(e); return; }
 
     const pips = (n) => { const d = el("div", "pips"); d.style.setProperty("--min", MIN_RATINGS); for (let i = 0; i < MIN_RATINGS; i++) d.append(el("span", i < n ? "on" : "")); d.setAttribute("aria-hidden", "true"); return d; };
     const shown = items.filter((c) => c.shown), waiting = items.filter((c) => !c.shown).sort((a, b) => b.reviews.length - a.reviews.length || String(b.latest).localeCompare(String(a.latest)));
-    if (!shown.length) { const t = el("div", "group-title"); t.append(el("h2", null, "No employer has enough ratings yet"), el("span", "note", `Scores and comments appear once ${MIN_RATINGS} people have rated an employer, so nobody can work out who wrote what.`)); list.append(t); }
+    if (!shown.length) { const t = el("div", "group-title"); t.append(el("h2", null, "No employer has enough ratings yet"), el("span", "note", `Scores and comments appear once ${MIN_RATINGS} people have rated an employer, so nobody can work out who wrote what.`)); if (!sampleOn) { const b = el("button", "btn ghost", "Try with sample data"); b.type = "button"; b.style.justifySelf = "start"; b.onclick = () => setSample(true); t.append(b); } list.append(t); }
     for (const c of shown) {
       const card = el("button", "card"); card.type = "button"; card.style.setProperty("--sc", scoreColor(c.avg)); card.style.setProperty("--scb", scoreTint(c.avg));
       card.setAttribute("aria-label", `${c.name}, ${c.avg.toFixed(1)} out of 5 from ${c.reviews.length} ratings`);
@@ -999,7 +1004,8 @@ footer .small { font-size: 13px; opacity: .85; }
     const ht = el("div"); ht.append(el("span", "label", "Employer"), el("h2", null, c.name));
     const acts = el("div", "bar");
     const mine = me && c.reviews.find((r) => r.uid === me);
-    if (canWrite && db) { const rb = el("button", "btn", mine ? "Edit my rating" : "Rate this employer"); rb.type = "button"; rb.onclick = () => openForm(c.key); acts.append(rb); }
+    const isSample = c.reviews.every((r) => r.sample);
+    if (canWrite && db && !isSample) { const rb = el("button", "btn", mine ? "Edit my rating" : "Rate this employer"); rb.type = "button"; rb.onclick = () => openForm(c.key); acts.append(rb); }
     const back = el("button", "btn ghost", "Back to all"); back.type = "button"; back.onclick = () => { openKey = null; renderDetail(); $("list").hidden = false; };
     acts.append(back); head.append(ht, acts);
 
@@ -1013,6 +1019,7 @@ footer .small { font-size: 13px; opacity: .85; }
       if (mine) box.append(el("p", null, `Your rating (${mine.overall} · ${LABELS[mine.overall]}) is saved. You can edit or delete it any time.`));
       p.append(head, box); return;
     }
+    if (isSample) p.append(el("div", "owner-banner", "Fictional sample: a made-up employer with made-up ratings, shown so you can see how a full page looks. Not a real company."));
     if (!c.shown && isOwner) p.append(el("div", "owner-banner", `Hidden from everyone else: ${c.reviews.length} of ${MIN_RATINGS} ratings so far. You can see it because you own this app, so you can moderate.`));
 
     const sum = el("div", "summary");
@@ -1083,7 +1090,7 @@ footer .small { font-size: 13px; opacity: .85; }
       if (r.division && (c.divShown.has(keyOf(r.division)) || isOwner)) top.append(el("span", "div-chip", (r.flag === "worse" ? "⚑ " : "") + r.division + (r.flag === "worse" ? " · flagged worse" : r.flag === "better" ? " · flagged better" : "")));
       top.append(el("span", "meta", [r.role, r.at ? new Date(r.at).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" }) : ""].filter(Boolean).join(" · ")));
       if (me && r.uid === me) top.append(el("span", "chip mine", "Yours"));
-      if (isOwner && r.uid !== me) { const del = el("button", "btn danger", "Remove"); del.type = "button"; del.onclick = () => removeEntry(r.uid, c.key, del); top.append(del); }
+      if (isOwner && r.uid !== me && !r.sample) { const del = el("button", "btn danger", "Remove"); del.type = "button"; del.onclick = () => removeEntry(r.uid, c.key, del); top.append(del); }
       box.append(top);
       if (r.pros || r.cons) {
         const pc = el("div", "pc");
@@ -1102,7 +1109,7 @@ footer .small { font-size: 13px; opacity: .85; }
         if (j.story) en.append(el("div", "story-txt", j.story));
         const key = r.uid + "__" + c.key; const t = tallies[key] || {}; const tot = POLL.reduce((a, [v]) => a + (t[v] || 0), 0);
         const poll = el("div", "poll"); poll.append(el("span", "poll-q", "Who had room to do better? You decide."));
-        const opts = el("div", "poll-opts"); const own = me && r.uid === me; const can = db && me && canWrite && !own;
+        const opts = el("div", "poll-opts"); const own = me && r.uid === me; const can = db && me && canWrite && !own && !r.sample;
         POLL.forEach(([v, l, col]) => {
           const b = el("button", "poll-opt" + (myVotes[key] === v ? " mine" : "")); b.type = "button"; b.style.setProperty("--pc", col);
           const pct = tot ? Math.round((t[v] || 0) / tot * 100) : 0;
@@ -1220,7 +1227,7 @@ footer .small { font-size: 13px; opacity: .85; }
       if (hit) { err.textContent = `Please keep it professional. "${hit}" in ${label} isn't accepted here. Rephrase it and post again; strong feelings are welcome, profanity isn't.`; err.hidden = false; $(id).focus(); return; }
     }
     if (!$("f-agree").checked) { err.textContent = "Confirm you work or worked there and agree to the Terms and Privacy notice."; err.hidden = false; return; }
-    if (!me) { err.textContent = "Sign in to claude.ai to post a rating."; err.hidden = false; return; }
+    if (!me) { err.textContent = "Posting isn't available on this page right now."; err.hidden = false; return; }
     const cats = {}; CATS.forEach(([ck]) => { const v = Number(getRadio("c_" + ck)); if (v) cats[ck] = v; });
     const entry = { company, role: $("f-role").value.trim(), division: $("f-division").value.trim().replace(/\s+/g, " "), flag: $("f-division").value.trim() ? (getRadio("flag") || "same") : "", status: getRadio("status"), tenure: getRadio("tenure"), journey: (() => {
       const j = {}; ["hire", "onboard"].forEach((k) => { const v = Number(getRadio("j_" + k)); if (v) j[k] = v; });
@@ -1243,7 +1250,7 @@ footer .small { font-size: 13px; opacity: .85; }
       await writeMine(entries);
       const cnt = companies.find((x) => x.key === k)?.reviews.length || 0;
       const willCount = cnt + (docs.find((d) => d.uid === me)?.entries?.[k] ? 0 : 1);
-      toast(willCount < MIN_RATINGS ? `Saved. It shows once ${MIN_RATINGS} people rate this employer.` : (editingKey ? "Rating updated" : "Rating posted"));
+      toast(localMode ? "Saved on this device only" : willCount < MIN_RATINGS ? `Saved. It shows once ${MIN_RATINGS} people rate this employer.` : (editingKey ? "Rating updated" : "Rating posted"));
       openKey = k; $("formPanel").hidden = true; $("list").hidden = true;
       if (!docs.some((d) => d.uid === me)) docs.push({ uid: me, entries }); else docs.find((d) => d.uid === me).entries = entries;
       aggregate(); renderList(); renderDetail();
@@ -1297,11 +1304,8 @@ footer .small { font-size: 13px; opacity: .85; }
   (async () => {
     const [d, user] = await Promise.all([window.claude?.use?.("db") ?? null, window.claude?.use?.("user") ?? null]);
     db = d;
-    if (!db) {
-      if (!window.claude) { $("preview").hidden = false; $("bar").hidden = true; $("status").hidden = true; $("list").hidden = true; return; }
-      $("status").textContent = "Ratings can't load here. Open this page on claude.ai while signed in."; $("rateBtn").hidden = true; return;
-    }
-    if (user) {
+    if (!db) { db = localDb(); localMode = true; me = "this-device"; $("localNote").hidden = false; }
+    if (user && !localMode) {
       try { me = await user.id(); } catch {}
       try { isOwner = !!(await user.isOwner()); } catch {}
       try { const w = await user.can("data.write"); if (w === false) canWrite = false; } catch {}
@@ -1319,7 +1323,8 @@ footer .small { font-size: 13px; opacity: .85; }
       docs = snap.docs.map((s) => ({ uid: s.id, entries: s.data()?.entries || {} }));
       aggregate(); renderList(); if (openKey) renderDetail();
       const n = companies.reduce((a, c) => a + c.reviews.length, 0);
-      if (canWrite) $("status").textContent = n ? `${n} rating${n === 1 ? "" : "s"} across ${companies.length} employer${companies.length === 1 ? "" : "s"}.` : "No ratings yet.";
+      if (localMode) $("status").textContent = "Ratings you post here are saved only in this browser and are visible only on this device.";
+      else if (canWrite) $("status").textContent = n ? `${n} rating${n === 1 ? "" : "s"} across ${companies.length} employer${companies.length === 1 ? "" : "s"}.` : "No ratings yet.";
     }, () => { clearTimeout(timer); $("status").textContent = "Ratings stopped updating. Reload the page to reconnect."; });
   })();
 })();
