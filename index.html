@@ -358,7 +358,7 @@ footer .links span { padding: 0 6px; }
 footer .small { font-size: 13px; opacity: .85; }
 .notice { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; background: var(--hero); color: #fff; border-top: 3px solid var(--sun); padding: 8px max(16px, env(safe-area-inset-right, 0px)) calc(8px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); display: flex; align-items: center; justify-content: center; gap: 6px 14px; flex-wrap: wrap; font-size: 14px; }
 .notice p { margin: 0; }
-.notice .linkish { color: var(--sun); padding: 10px 0; }
+.notice .linkish { color: var(--sun); padding: 10px 0; display: inline; }
 .notice .btn { padding: 8px 20px; min-height: 40px; box-shadow: none; }
 body.has-notice .toast { bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
 body.has-notice footer { margin-bottom: 72px; }
@@ -688,7 +688,7 @@ footer .links button { min-height: 40px; }
 </div>
 <div class="toast" id="toast" hidden role="status"></div>
 <div class="notice" id="notice" role="region" aria-label="Terms notice" hidden>
-  <p>By using this app you agree to the <button type="button" class="linkish" data-open="sec-terms">Terms</button> and <button type="button" class="linkish" data-open="sec-privacy">Privacy</button>.</p>
+  <p>By using this app you agree to the <button type="button" class="linkish" data-open="sec-terms">Terms</button> and <span style="white-space:nowrap"><button type="button" class="linkish" data-open="sec-privacy">Privacy</button>.</span></p>
   <button class="btn" type="button" id="noticeOk">OK</button>
 </div>
 
